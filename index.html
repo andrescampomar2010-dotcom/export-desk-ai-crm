@@ -291,7 +291,7 @@ pre.sum{white-space:pre-wrap;font:12px/1.5 var(--sans);background:var(--bg);bord
   <div class="grid2">
     <div class="pane"><div class="pane-h"><span>📥 O pega un email a mano (outsourcing, reenviados…)</span></div>
       <div style="padding:12px;display:flex;flex-direction:column;gap:8px">
-        <div class="row"><span class="mut mono" style="font-size:11px">Ejemplos:</span><button class="btn sm" data-sample="0">🇫🇷 Usine peinture · REI 120</button><button class="btn sm" data-sample="1">🇵🇱 Distribuidor · armarios + cubetos</button><button class="btn sm" data-sample="2">🇮🇹 Officina · absorbentes</button></div>
+        <div class="row"><span class="mut mono" style="font-size:11px">Ejemplos:</span><button class="btn sm" data-sample="0">🇧🇪 Métallerie · sistema a medida</button><button class="btn sm" data-sample="1">🇵🇱 Distribuidor · axiales + cortinas</button><button class="btn sm" data-sample="2">🇮🇹 Officina · centrífugos + filtros</button></div>
         <textarea id="emailIn" rows="18" placeholder="Pega aquí el email completo (asunto, cuerpo y firma)…"></textarea>
         <div class="row"><button class="btn pri" id="btnExtract">⚡ Analizar y extraer</button><span class="mut" style="font-size:11.5px" id="extractMode"></span></div>
       </div>
@@ -320,7 +320,7 @@ pre.sum{white-space:pre-wrap;font:12px/1.5 var(--sans);background:var(--bg);bord
     <p style="margin-top:8px">Tres ideas concretas, no quinientas — construidas sobre lo que una pyme exportadora suele tener ya en marcha: una web con chat, prospección externa y una tarifa en Excel.</p>
   </div>
   <div class="grid3">
-    <div class="card"><h2>① Agente web que cualifica</h2><p>Atiende 24/7 en el idioma del cliente, entiende la necesidad (volumen, sustancia, ubicación, plazo), da orientación normativa sin comprometerse, pide consentimiento RGPD y crea la ficha completa en el CRM asignada al comercial correcto.</p></div>
+    <div class="card"><h2>① Agente web que cualifica</h2><p>Atiende 24/7 en el idioma del cliente, entiende la necesidad (tipo de espacio, volumen, problema, plazo), da orientación de cálculo sin comprometerse, pide consentimiento RGPD y crea la ficha completa en el CRM asignada al comercial correcto.</p></div>
     <div class="card"><h2>② Motor de seguimiento de ofertas</h2><p>Cada oferta aprobada programa recordatorios (D+3, D+7, D+14) con el email ya redactado en el idioma del cliente. Bandeja diaria: vencidos, hoy y próximos. Ninguna oferta queda sin seguimiento.</p></div>
     <div class="card"><h2>③ Email → Lead en segundos</h2><p>Los correos que llegan a comercial@ o del outsourcing se convierten en fichas: contacto, país, productos y cantidades, plazo y borrador de oferta desde tarifa. Adiós al copiar-pegar entre Excel y correo.</p></div>
   </div>
@@ -339,7 +339,7 @@ pre.sum{white-space:pre-wrap;font:12px/1.5 var(--sans);background:var(--bg);bord
   <div class="card"><h2>Conectores MCP, memoria y gemelo digital</h2><div class="grid3">
     <div><p><b>CRM y correo vía MCP.</b> El agente se conecta por Model Context Protocol al CRM (alta y actualización de contactos y oportunidades) y al buzón de empresa (capta peticiones, detecta respuestas a ofertas y deja el envío en borrador tras la revisión humana). Sin desarrollos a medida por herramienta: si el CRM no tiene servidor MCP, n8n lo expone con su nodo MCP Server Trigger.</p></div>
     <div><p><b>Memoria.</b> Cada cliente acumula su historial (peticiones, ofertas, objeciones, motivos de pérdida) y el equipo acumula aprendizajes. El agente reconoce al cliente que vuelve, mantiene al mismo comercial y nunca revela datos anteriores al visitante.</p></div>
-    <div><p><b>Gemelo digital.</b> Modelo vivo de la empresa: catálogo, stock, capacidad de fabricación de contenedores, cartera comprometida y base de conocimiento. Calcula plazos reales en cada oferta y permite simular escenarios de crecimiento export.</p></div></div></div>
+    <div><p><b>Gemelo digital.</b> Modelo vivo de la empresa: catálogo, stock, capacidad de fabricación de los sistemas a medida, cartera comprometida y base de conocimiento. Calcula plazos reales en cada oferta y permite simular escenarios de crecimiento export.</p></div></div></div>
   <div class="grid2">
     <div class="card"><h2>Encaje con lo que ya existe</h2><ul>
       <li><b>Widget de chat:</b> este prototipo sirve como especificación funcional (flujo, campos, reglas de asignación, integraciones), lista para implantar o para medir a un desarrollador externo.</li>
@@ -349,7 +349,7 @@ pre.sum{white-space:pre-wrap;font:12px/1.5 var(--sans);background:var(--bg);bord
     <div class="card"><h2>Controles desde el día 1</h2><ul>
       <li>Precios y condiciones <b>nunca</b> automáticos: siempre revisa una persona (si se edita una oferta aprobada, vuelve a revisión).</li>
       <li>RGPD: consentimiento explícito, minimización y borrado del contacto si no acepta.</li>
-      <li>Normativa solo orientativa (APQ / ICPE); el técnico valida.</li>
+      <li>Cálculos de caudal solo orientativos; el técnico valida el dimensionado.</li>
       <li>En producción la clave de la IA vive en el servidor (n8n), nunca en el navegador.</li>
       <li>Registro completo de conversaciones y actividad por lead.</li></ul></div>
   </div>
@@ -428,36 +428,34 @@ const FREIGHT={ES:0,PT:60,FR:95,BE:120,NL:140,IT:140,DE:150,PL:180,GB:210,CH:220
 const STAGES=[['nuevo','Nuevo'],['cualificado','Cualificado'],['oferta','Oferta · revisión'],['enviada','Oferta enviada'],['negociacion','Negociación'],['ganado','Ganado'],['perdido','Perdido']];
 const SRC={chat:'💬 Chat web',email:'📥 Email',manual:'✍️ Manual',seed:'🗄 Histórico'};
 const V={
- ubic:{interior:['Interior de nave','Intérieur du bâtiment','Indoors'],ext_cerca:['Exterior a < 5 m de edificio','Extérieur à < 5 m d’un bâtiment','Outdoors, < 5 m from a building'],ext_lejos:['Exterior a > 5 m','Extérieur à > 5 m','Outdoors, > 5 m away'],exterior:['Exterior (distancia por confirmar)','Extérieur','Outdoors']},
- sust:{inflamables:['Inflamables','Inflammables','Flammables'],corrosivos:['Corrosivos (ácidos/bases)','Corrosifs','Corrosives'],toxicos:['Tóxicos','Toxiques','Toxic'],litio:['Baterías de litio','Batteries lithium','Lithium batteries'],varios:['Varios / mezcla','Divers','Mixed'],otro:['Otro','Autre','Other']},
+ ubic:{calor:['Calor excesivo','Chaleur excessive','Excess heat'],humo:['Humos / polvo','Fumées / poussières','Fumes / dust'],humedad:['Humedad / condensación','Humidité / condensation','Humidity / condensation'],olores:['Olores / aire viciado','Odeurs / air vicié','Odours / stale air']},
+ sust:{nueva:['Instalación nueva','Nouvelle installation','New installation'],sustituir:['Sustituir equipos','Remplacement d’équipements','Replacing equipment'],ampliar:['Ampliar la existente','Extension de l’existant','Expanding current setup']},
  plazo:{urgente:['Urgente (< 1 mes)','Urgent (< 1 mois)','Urgent (< 1 month)'],'1-3m':['1–3 meses','1–3 mois','1–3 months'],info:['Solo información','Simple information','Information only']},
- formato:{bidon:['bidones 200 L','fûts 200 L','200 L drums'],ibc:['IBC 1.000 L','GRV 1 000 L','1,000 L IBCs'],garrafas:['garrafas','bidons','cans'],otro:['otro','autre','other']}
+ formato:{nave:['nave industrial','hall industriel','industrial hall'],taller:['taller','atelier','workshop'],parking:['parking','parking','car park'],obrador:['obrador / cocina','laboratoire / cuisine','kitchen / food prep']}
 };
 const vv=(k,v,lang)=>v?((V[k]&&V[k][v])?V[k][v][LI[lang]??0]:v):'';
+const ACH={nave:5,taller:8,parking:6,obrador:10};
 const APQV={
- rei:['>500 L de inflamables en interior o a <5 m de un edificio: en España suele exigirse almacén REI 120 (MIE APQ-10).','>500 L d’inflammables à l’intérieur ou à <5 m d’un bâtiment : en Espagne, un stockage REI 120 est généralement exigé (APQ-10).','>500 L of flammables indoors or within 5 m of a building: in Spain a REI 120 store is usually required (APQ-10).'],
- far:['Exterior a >5 m: el REI 120 no siempre es obligatorio, pero sí la retención y las distancias de seguridad (APQ-10).','Extérieur à >5 m : le REI 120 n’est pas toujours obligatoire, mais la rétention et les distances de sécurité oui.','Outdoors >5 m away: REI 120 is not always mandatory, but retention and safety distances are.'],
- small:['≤500 L de inflamables: puede bastar un armario de seguridad tipo 90 con retención (a validar).','≤500 L d’inflammables : une armoire de sécurité type 90 avec rétention peut suffire (à valider).','≤500 L of flammables: a type 90 safety cabinet with retention may be enough (to be validated).'],
- li:['Baterías de litio: recomendable almacenamiento con resistencia al fuego y detección.','Batteries lithium : stockage résistant au feu avec détection recommandé.','Lithium batteries: fire-resistant storage with detection is recommended.'],
- gen:['Revisar compatibilidad entre sustancias y volumen de retención según APQ.','Vérifier la compatibilité des substances et le volume de rétention.','Check substance compatibility and retention volume.']
+ nave:['Nave industrial: orientativo 4–6 renovaciones de aire por hora según la actividad.','Hall industriel : 4–6 renouvellements d’air par heure indicatifs selon l’activité.','Industrial hall: a guide of 4–6 air changes per hour depending on the activity.'],
+ taller:['Taller: orientativo 6–10 renovaciones/hora, y más si hay humos de soldadura.','Atelier : 6–10 renouvellements/heure indicatifs, davantage avec fumées de soudure.','Workshop: a guide of 6–10 air changes per hour, more with welding fumes.'],
+ parking:['Parking: orientativo ~6 renovaciones/hora; el dimensionado definitivo depende de la normativa local de CO y desenfumado.','Parking : ~6 renouvellements/heure indicatifs ; le dimensionnement dépend de la réglementation locale (CO, désenfumage).','Car park: a guide of ~6 air changes per hour; final sizing depends on local CO and smoke-extract rules.'],
+ obrador:['Obrador / cocina: orientativo 8–12 renovaciones/hora según cargas térmicas y vapores.','Laboratoire / cuisine : 8–12 renouvellements/heure indicatifs selon les charges thermiques et les vapeurs.','Kitchen / food prep: a guide of 8–12 air changes per hour depending on heat loads and vapours.'],
+ gen:['Orientación general: el caudal se estima multiplicando el volumen del local por las renovaciones/hora recomendadas para la actividad.','Indication générale : le débit s’estime en multipliant le volume du local par les renouvellements/heure recommandés.','General guide: airflow is estimated by multiplying the room volume by the recommended air changes per hour.']
 };
 
 function seedCatalog(){return [
- {ref:'CNT-REI120-2',cat:'cnt',es:'Contenedor modular REI 120 · 2 IBC / 8 bidones',fr:'Conteneur modulaire coupe-feu REI 120 · 2 GRV / 8 fûts',en:'REI 120 fire-rated modular store · 2 IBC / 8 drums',price:14900,weeks:6},
- {ref:'CNT-REI120-4',cat:'cnt',es:'Contenedor modular REI 120 · 4 IBC / 16 bidones',fr:'Conteneur modulaire coupe-feu REI 120 · 4 GRV / 16 fûts',en:'REI 120 fire-rated modular store · 4 IBC / 16 drums',price:21500,weeks:7},
- {ref:'CNT-REI120-XL',cat:'cnt',es:'Contenedor modular REI 120 a medida (> 4 IBC) — bajo estudio',fr:'Conteneur modulaire REI 120 sur mesure (> 4 GRV) — à l’étude',en:'Custom REI 120 modular store (> 4 IBC) — under study',price:0,weeks:8,study:true},
- {ref:'ARM-INF90-1200',cat:'arm',es:'Armario de seguridad inflamables tipo 90 (EN 14470-1) · 1.200 mm',fr:'Armoire de sécurité inflammables type 90 (EN 14470-1) · 1 200 mm',en:'Flammables safety cabinet type 90 (EN 14470-1) · 1,200 mm',price:2350,weeks:2},
- {ref:'ARM-INF90-600',cat:'arm',es:'Armario de seguridad inflamables tipo 90 (EN 14470-1) · 600 mm',fr:'Armoire de sécurité inflammables type 90 (EN 14470-1) · 600 mm',en:'Flammables safety cabinet type 90 (EN 14470-1) · 600 mm',price:1690,weeks:2},
- {ref:'ARM-AB-ECO',cat:'arm',es:'Armario para ácidos y bases (EN 61010-1)',fr:'Armoire acides et bases (EN 61010-1)',en:'Acids & bases cabinet (EN 61010-1)',price:890,weeks:2},
- {ref:'ARM-LI',cat:'arm',es:'Armario para baterías de litio (carga y almacenamiento)',fr:'Armoire batteries lithium (charge et stockage)',en:'Lithium-ion battery cabinet (charging & storage)',price:3200,weeks:3},
- {ref:'CUB-AC-2B',cat:'cub',es:'Cubeto de retención en acero · 2 bidones',fr:'Bac de rétention acier · 2 fûts',en:'Steel spill pallet · 2 drums',price:285,weeks:1},
- {ref:'CUB-AC-4B',cat:'cub',es:'Cubeto de retención en acero · 4 bidones',fr:'Bac de rétention acier · 4 fûts',en:'Steel spill pallet · 4 drums',price:420,weeks:1},
- {ref:'CUB-PE-2B',cat:'cub',es:'Cubeto de retención PEHD · 2 bidones (químicos agresivos)',fr:'Bac de rétention PEHD · 2 fûts (produits agressifs)',en:'HDPE spill pallet · 2 drums (aggressive chemicals)',price:210,weeks:1},
- {ref:'CUB-IBC',cat:'cub',es:'Cubeto de retención para IBC 1.000 L',fr:'Bac de rétention pour GRV 1 000 L',en:'IBC spill pallet 1,000 L',price:690,weeks:1},
- {ref:'ABS-UNI-100',cat:'abs',es:'Absorbente universal en hojas · caja 100 uds',fr:'Absorbant tous liquides en feuilles · carton 100',en:'Universal absorbent pads · box of 100',price:79,weeks:1},
- {ref:'ABS-HC-100',cat:'abs',es:'Absorbente hidrocarburos en hojas · caja 100 uds',fr:'Absorbant hydrocarbures en feuilles · carton 100',en:'Oil-only absorbent pads · box of 100',price:85,weeks:1},
- {ref:'KIT-50',cat:'abs',es:'Kit antiderrames 50 L',fr:'Kit antipollution 50 L',en:'Spill kit 50 L',price:129,weeks:1},
- {ref:'KIT-240',cat:'abs',es:'Kit antiderrames 240 L (contenedor con ruedas)',fr:'Kit antipollution 240 L (conteneur sur roues)',en:'Spill kit 240 L (wheeled bin)',price:395,weeks:1}
+ {ref:'VPR-20K',cat:'prj',es:'Sistema de ventilación a medida · hasta 20.000 m³/h',fr:'Système de ventilation sur mesure · jusqu’à 20 000 m³/h',en:'Custom ventilation system · up to 20,000 m³/h',price:14900,weeks:6},
+ {ref:'VPR-40K',cat:'prj',es:'Sistema de ventilación a medida · hasta 40.000 m³/h',fr:'Système de ventilation sur mesure · jusqu’à 40 000 m³/h',en:'Custom ventilation system · up to 40,000 m³/h',price:21500,weeks:7},
+ {ref:'VPR-XL',cat:'prj',es:'Sistema de ventilación a medida (> 40.000 m³/h) — bajo estudio',fr:'Système de ventilation sur mesure (> 40 000 m³/h) — à l’étude',en:'Custom ventilation system (> 40,000 m³/h) — under study',price:0,weeks:8,study:true},
+ {ref:'VAX-450',cat:'axi',es:'Ventilador axial mural Ø450 · 5.100 m³/h',fr:'Ventilateur axial mural Ø450 · 5 100 m³/h',en:'Wall axial fan Ø450 · 5,100 m³/h',price:390,weeks:1},
+ {ref:'VAX-630',cat:'axi',es:'Ventilador axial mural Ø630 · 11.000 m³/h',fr:'Ventilateur axial mural Ø630 · 11 000 m³/h',en:'Wall axial fan Ø630 · 11,000 m³/h',price:590,weeks:1},
+ {ref:'VCE-4200',cat:'cen',es:'Caja de ventilación centrífuga acústica · 4.200 m³/h',fr:'Caisson de ventilation centrifuge insonorisé · 4 200 m³/h',en:'Acoustic centrifugal fan box · 4,200 m³/h',price:1290,weeks:2},
+ {ref:'VCE-9000',cat:'cen',es:'Caja de ventilación centrífuga acústica · 9.000 m³/h',fr:'Caisson de ventilation centrifuge insonorisé · 9 000 m³/h',en:'Acoustic centrifugal fan box · 9,000 m³/h',price:2150,weeks:3},
+ {ref:'VTE-500',cat:'cen',es:'Extractor de tejado Ø500 · 6.500 m³/h',fr:'Extracteur de toiture Ø500 · 6 500 m³/h',en:'Roof extractor Ø500 · 6,500 m³/h',price:740,weeks:2},
+ {ref:'VCA-150',cat:'acc',es:'Cortina de aire industrial 1,5 m',fr:'Rideau d’air industriel 1,5 m',en:'Industrial air curtain 1.5 m',price:860,weeks:1},
+ {ref:'VCA-200',cat:'acc',es:'Cortina de aire industrial 2,0 m',fr:'Rideau d’air industriel 2,0 m',en:'Industrial air curtain 2.0 m',price:1090,weeks:1},
+ {ref:'VAC-DUCT',cat:'acc',es:'Kit de conducto y rejillas (tramo 6 m)',fr:'Kit gaine et grilles (tronçon 6 m)',en:'Duct and grille kit (6 m run)',price:190,weeks:1},
+ {ref:'VFI-G4',cat:'acc',es:'Filtros G4 de repuesto · caja 4 uds',fr:'Filtres G4 de rechange · carton 4',en:'G4 replacement filters · box of 4',price:45,weeks:1}
 ];}
 function seedTeam(){return [
  {id:'dx',nombre:'Dirección Export',rol:'Dirección Export',idiomas:'FR · ES · EN',email:'',color:'#ffb000'},
@@ -466,13 +464,12 @@ function seedTeam(){return [
  {id:'se',nombre:'Delegación Sur',rol:'Comercial Sur',idiomas:'ES',email:'',color:'#b48cff'},
  {id:'bc',nombre:'Delegación Noreste',rol:'Comercial Noreste',idiomas:'ES · CA',email:'',color:'#ff7a59'},
  {id:'cn',nombre:'Delegación Canarias',rol:'Comercial Canarias',idiomas:'ES',email:'',color:'#2ad4c9'},
- {id:'pt',nombre:'Oficina Portugal',rol:'Comercial Portugal',idiomas:'PT · ES',email:'',color:'#e6d74a'},
- {id:'ma',nombre:'Oficina Marruecos',rol:'Comercial Marruecos',idiomas:'FR · AR · ES',email:'',color:'#ff5c8a'}
+ {id:'pt',nombre:'Oficina Portugal',rol:'Comercial Portugal',idiomas:'PT · ES',email:'',color:'#e6d74a'}
 ];}
 function seedRules(){return [
- {pais:'FR',region:'',owner:'dx'},{pais:'BE',region:'',owner:'dx'},{pais:'CH',region:'',owner:'dx'},{pais:'CI',region:'',owner:'dx'},
+ {pais:'FR',region:'',owner:'dx'},{pais:'BE',region:'',owner:'dx'},{pais:'CH',region:'',owner:'dx'},
  {pais:'IT',region:'',owner:'tx'},{pais:'PL',region:'',owner:'tx'},{pais:'GB',region:'',owner:'tx'},{pais:'DE',region:'',owner:'tx'},{pais:'NL',region:'',owner:'tx'},{pais:'UA',region:'',owner:'tx'},
- {pais:'PT',region:'',owner:'pt'},{pais:'MA',region:'',owner:'ma'},
+ {pais:'PT',region:'',owner:'pt'},
  {pais:'ES',region:'sur',owner:'se'},{pais:'ES',region:'noreste',owner:'bc'},{pais:'ES',region:'canarias',owner:'cn'},{pais:'ES',region:'',owner:'bu'},
  {pais:'*',region:'',owner:'dx'}
 ];}
@@ -513,11 +510,11 @@ function assign(l,silent){
  const r=R.find(x=>x.pais===l.pais&&x.region&&x.region===l.region)||R.find(x=>x.pais===l.pais&&!x.region)||R.find(x=>x.pais==='*');
  let owner=r?r.owner:'', cont=false;
  const mm=DB.settings.memContinuity&&DB.memory?memGet(l):null; if(mm&&mm.owner&&team(mm.owner)&&mm.leads.some(id=>id!==l.id)&&mm.owner!==owner){ owner=mm.owner; cont=true; }
- const hasCnt=l.necesidad.productos.some(p=>p.ref.startsWith('CNT'));
+ const hasCnt=l.necesidad.productos.some(p=>p.ref.startsWith('VPR'));
  l.cc=(DB.settings.ccExport&&hasCnt&&l.pais!=='ES'&&owner!=='dx'&&team('dx'))?['dx']:[];
  if(owner&&l.owner!==owner){
   l.owner=owner; const t=team(owner)||{};
-  act(l,`Asignado a ${t.nombre} · ${cont?'continuidad (cliente conocido en memoria)':'regla '+l.pais+(l.region?'/'+l.region:'')}${l.cc.length?' · CC Dirección Export (contenedor)':''}`,'assign');
+  act(l,`Asignado a ${t.nombre} · ${cont?'continuidad (cliente conocido en memoria)':'regla '+l.pais+(l.region?'/'+l.region:'')}${l.cc.length?' · CC Dirección Export (proyecto a medida)':''}`,'assign');
   if(!silent){toast(`🔔 Aviso a ${t.nombre}: nuevo lead ${flag(l.pais)} ${l.contact.empresa||''}`,'inf'); emit('lead.assigned',l);}
  }
 }
@@ -527,14 +524,14 @@ function estValue(l){ if(l.offer) return offerTotals(l).sub; return l.necesidad.
 function scoreLead(l){
  const w=[]; let s=0; const add=(p,t)=>{s+=p; w.push([p,t]);};
  const v=estValue(l), n=l.necesidad;
- if(n.productos.some(p=>p.ref.startsWith('CNT'))) add(30,'Contenedor REI 120 (fabricación propia, ticket alto)');
+ if(n.productos.some(p=>p.ref.startsWith('VPR'))) add(30,'Sistema a medida (fabricación propia, ticket alto)');
  else if(v>=3000) add(22,'Valor estimado ≥ 3.000 €'); else if(v>=800) add(14,'Valor estimado ≥ 800 €'); else if(v>0) add(6,'Necesidad concreta identificada');
  if(n.plazo==='urgente') add(20,'Plazo urgente (< 1 mes)'); else if(n.plazo==='1-3m') add(10,'Plazo 1–3 meses');
  const em=l.contact.email; if(em&&!FREEMAIL.test(em)) add(10,'Email corporativo'); else if(em) add(4,'Email genérico');
  if(l.contact.telefono) add(5,'Teléfono facilitado');
  if(DECISOR.test(l.contact.cargo||'')) add(10,'Cargo con capacidad de decisión');
- if(l.pais==='FR') add(10,'Mercado objetivo export (Francia)'); else if(['PL','IT','GB','DE'].includes(l.pais)) add(6,'Mercado objetivo export'); else if(l.pais) add(4,'Mercado activo');
- if(n.vol>500&&n.sust==='inflamables'&&['interior','ext_cerca'].includes(n.ubic)) add(8,'Obligación normativa probable (APQ-10)');
+ if(['PT','PL','IT','GB','DE','BE'].includes(l.pais)) add(6,'Mercado export activo'); else if(l.pais) add(4,'Mercado activo');
+ if(n.vol>=5000&&n.formato==='nave') add(8,'Nave completa: probable proyecto a medida');
  if(l.priority) add(5,'Pidió contacto con una persona');
  if(l.returning) add(8,'Cliente con historial (memoria)');
  l.score=Math.min(99,s); l.scoreWhy=w; return l.score;
@@ -542,20 +539,18 @@ function scoreLead(l){
 const lvl=s=>s>=70?['hot','Caliente']:s>=45?['warm','Templado']:['cold','Frío'];
 function apqHint(l){
  const n=l.necesidad; if(!n.vol) return null;
- const max=n.formato==='ibc'?1000:n.formato==='bidon'?200:Math.min(n.vol,1000);
- const ret=Math.max(max,Math.ceil(n.vol*0.1)); let k='gen';
- if(n.sust==='inflamables'){ if(n.vol<=500) k='small'; else if(n.ubic==='ext_lejos') k='far'; else if(n.ubic==='interior'||n.ubic==='ext_cerca') k='rei'; }
- else if(n.sust==='litio') k='li';
- return {k,ret,out:!!l.pais&&l.pais!=='ES'};
+ const k=ACH[n.formato]!=null?n.formato:'gen';
+ const ret=n.vol*(ACH[n.formato]||5);
+ return {k,ret,out:false};
 }
 const apqText=(l,lang)=>{const h=apqHint(l); return h?APQV[h.k][LI[lang]??0]:'';};
 function offerLang(l){ if(l.offer&&l.offer.lang) return l.offer.lang; if(['es','fr','en'].includes(l.idioma)) return l.idioma; return (COUNTRIES[l.pais]||{}).doc||'es'; }
-function autoDto(c,q){ if(!c||c.cat==='cnt') return 0; let d=0; for(const r of DB.settings.discounts) if(q>=r.min) d=Math.max(d,r.pct); return d; }
+function autoDto(c,q){ if(!c||c.cat==='prj') return 0; let d=0; for(const r of DB.settings.discounts) if(q>=r.min) d=Math.max(d,r.pct); return d; }
 function buildOffer(l){
  const lines=l.necesidad.productos.filter(p=>cat(p.ref)).map(p=>{const c=cat(p.ref); return {ref:p.ref,qty:p.qty||1,price:c.price,dto:autoDto(c,p.qty||1),opt:false,inc:false};});
  const refs=lines.map(x=>x.ref);
- if(refs.some(r=>r.startsWith('CNT'))&&!refs.includes('KIT-240')) lines.push({ref:'KIT-240',qty:1,price:cat('KIT-240').price,dto:0,opt:true,inc:false});
- if(refs.some(r=>r.startsWith('ARM-INF'))&&!refs.some(r=>r.startsWith('ABS'))) lines.push({ref:'ABS-UNI-100',qty:1,price:cat('ABS-UNI-100').price,dto:0,opt:true,inc:false});
+ if(refs.some(r=>r.startsWith('VPR'))&&!refs.includes('VAC-DUCT')) lines.push({ref:'VAC-DUCT',qty:1,price:cat('VAC-DUCT').price,dto:0,opt:true,inc:false});
+ if(refs.some(r=>r.startsWith('VCE'))&&!refs.includes('VFI-G4')) lines.push({ref:'VFI-G4',qty:1,price:cat('VFI-G4').price,dto:0,opt:true,inc:false});
  const num='OF-'+String(new Date().getFullYear()).slice(2)+'-'+String(DB.offerSeq++).padStart(4,'0');
  l.offer={number:num,lines,incoterm:(l.pais==='ES'?'Portes pagados':'DAP'),validDays:30,notes:'',status:'borrador',lang:null,created:now(),approvedBy:'',approvedAt:null,sentAt:null};
  l.offer.lang=offerLang(l);
@@ -565,7 +560,7 @@ function offerTotals(l){
  const o=l.offer; if(!o) return {sub:0,freight:null,total:0,study:false,hasCnt:false};
  let sub=0, study=false;
  for(const ln of o.lines){ if(ln.opt&&!ln.inc) continue; const c=cat(ln.ref); if((c&&c.study)||!ln.price) study=true; sub+=ln.qty*ln.price*(1-(ln.dto||0)/100); }
- const hasCnt=o.lines.some(x=>x.ref.startsWith('CNT')&&(!x.opt||x.inc));
+ const hasCnt=o.lines.some(x=>x.ref.startsWith('VPR')&&(!x.opt||x.inc));
  let fr=hasCnt?null:(FREIGHT[l.pais]??null);
  if(l.pais==='ES'&&l.region==='canarias') fr=hasCnt?null:180;
  if(fr===0&&sub<500) fr=35;
@@ -621,23 +616,23 @@ function leadProps(){ const refs=DB.catalog.map(c=>c.ref); return {
  region_es:{type:'string',enum:['norte','sur','noreste','canarias'],description:'Solo si país = ES. norte=Norte/Centro, sur=Andalucía/Extremadura, noreste=Cataluña/Aragón/Levante'},
  idioma:{type:'string',description:'ISO 639-1 del visitante (es, fr, en, it, pl, de, pt…)'},sector:{type:'string'},
  productos:{type:'array',items:{type:'object',properties:{ref:{type:'string',enum:refs},cantidad:{type:'integer'},nota:{type:'string'}},required:['ref']}},
- volumen_litros:{type:'number'},formato:{type:'string',enum:['bidones','ibc','garrafas','otro']},
- sustancia:{type:'string',enum:['inflamables','corrosivos','toxicos','litio','varios','otro']},
- ubicacion:{type:'string',enum:['interior','ext_cerca','ext_lejos'],description:'interior / exterior a menos de 5 m de un edificio / exterior a más de 5 m'},
+ volumen_m3:{type:'number',description:'Volumen del local en m³'},formato:{type:'string',enum:['nave','taller','parking','obrador']},
+ instalacion:{type:'string',enum:['nueva','sustituir','ampliar']},
+ problema:{type:'string',enum:['calor','humo','humedad','olores'],description:'Problema principal a resolver'},
  plazo:{type:'string',enum:['urgente','1-3m','info']},consentimiento_rgpd:{type:'boolean'},
  detalles:{type:'array',items:{type:'string'},description:'Detalles concretos mencionados por el cliente (accesos, medidas, normativa, competencia, presupuesto, objeciones, destino de entrega…), en su idioma original'}
 };}
 function sysPrompt(l){
  const catl=DB.catalog.map(c=>`- ${c.ref}: ${c.es}`).join('\n');
  return `Eres el asistente comercial virtual del widget de chat de la web de ACME (prototipo de demostración).
-EMPRESA: ACME Seguridad Industrial (empresa ficticia de demostración, España). Vende EQUIPOS (nunca digas "maquinaria") para minimizar el riesgo al almacenar, manipular y transportar mercancías peligrosas: absorbentes industriales y kits antiderrame, armarios de seguridad (inflamables tipo 90 EN 14470-1, ácidos/bases, baterías de litio), cubetos y suelos de retención (acero, PEHD, IBC) y contenedores modulares REI 120. Exporta a Francia, Polonia, Italia, Reino Unido, Alemania y África francófona.
+EMPRESA: ACME Ventilación Industrial (empresa ficticia de demostración, España). Diseña, fabrica y vende EQUIPOS de ventilación industrial: ventiladores axiales murales, cajas de ventilación centrífugas acústicas, extractores de tejado, cortinas de aire industriales, conductos, filtros y sistemas de ventilación a medida para naves, talleres, parkings y obradores. Exporta a varios países europeos.
 
-OBJETIVO: cualificar al visitante de forma natural y breve para que un comercial le prepare una oferta. Recoge: necesidad y producto(s), cantidades, volumen y formato (bidones de 200 L, IBC de 1.000 L), tipo de sustancia, ubicación (interior / exterior a <5 m de un edificio / exterior a >5 m), plazo, nombre, empresa, cargo, email y/o teléfono, país (y zona si es España) y CONSENTIMIENTO RGPD explícito. Recoge también en "detalles" cualquier dato extra (accesos para camión-grúa, medidas, normativa, competencia, presupuesto, objeciones, lugar de entrega).
+OBJETIVO: cualificar al visitante de forma natural y breve para que un comercial le prepare una oferta. Recoge: necesidad y producto(s), cantidades, tipo de espacio (nave, taller, parking, obrador) y su volumen aproximado en m³, problema principal (calor, humos, humedad, olores), si es instalación nueva, sustitución o ampliación, plazo, nombre, empresa, cargo, email y/o teléfono, país (y zona si es España) y CONSENTIMIENTO RGPD explícito. Recoge también en "detalles" cualquier dato extra (altura de la nave, accesos, potencia eléctrica disponible, ruido máximo admisible, competencia, presupuesto, objeciones, lugar de entrega).
 
 REGLAS:
 - Responde SIEMPRE en el idioma del visitante. Mensajes cortos (2–4 frases), máximo dos preguntas por turno, tono profesional y cercano.
 - NUNCA des precios, descuentos, plazos firmes ni condiciones: explica que un comercial prepara y revisa la oferta.
-- Normativa: puedes orientar en términos generales (España, RD 656/2017 APQ: el cubeto debe retener el mayor recipiente y al menos el 10 % del total; más de 500 L de inflamables en interior o a menos de 5 m de un edificio suele exigir almacén REI 120 según APQ-10; en Francia aplica ICPE; fuera de España, normativa local). Aclara siempre que es orientativo y que lo valida el equipo técnico. No inventes datos técnicos.
+- Cálculo de caudal: puedes orientar en términos generales (el caudal se estima multiplicando el volumen del local por las renovaciones/hora recomendadas para la actividad: nave 4–6, taller 6–10, parking ~6, obrador 8–12). Aclara siempre que es orientativo y que lo valida el equipo técnico. No inventes datos técnicos.
 - Llama a registrar_datos CADA VEZ que el visitante aporte información nueva (puedes acompañarla de tu respuesta de texto).
 - Antes de cerrar, pide consentimiento RGPD: "¿aceptas que ACME trate estos datos solo para preparar y enviarte la oferta?". Si no acepta, no registres datos de contacto y ofrece comercial@acme.test.
 - Cuando tengas necesidad/producto, nombre o empresa, email o teléfono, país y consentimiento, llama a finalizar_cualificacion y despídete indicando que recibirá una oferta revisada por una persona (respuesta habitual < 24 h laborables).
@@ -645,9 +640,9 @@ REGLAS:
 
 CATÁLOGO (usa estas refs en "productos"):
 ${catl}
-Contenedores: hasta 2.000 L (2 IBC u 8 bidones) → CNT-REI120-2; hasta 4.000 L → CNT-REI120-4; más → CNT-REI120-XL.
+Sistemas a medida: hasta 20.000 m³/h → VPR-20K; hasta 40.000 m³/h → VPR-40K; más → VPR-XL.
 
-CONOCIMIENTO Y PLAZOS: ante preguntas técnicas, normativas o comerciales llama a consultar_conocimiento antes de responder y no afirmes nada que no aparezca. Si preguntan por plazos, usa consultar_disponibilidad y comunícalos siempre como orientativos, a confirmar por el comercial.`
+CONOCIMIENTO Y PLAZOS: ante preguntas técnicas o comerciales llama a consultar_conocimiento antes de responder y no afirmes nada que no aparezca. Si preguntan por plazos, usa consultar_disponibilidad y comunícalos siempre como orientativos, a confirmar por el comercial.`
  +(DB.memory.global.length?`\n\nAPRENDIZAJES DEL EQUIPO (internos, para orientar el trato):\n${DB.memory.global.slice(0,5).map(g=>'- '+g.txt).join('\n')}`:'')
  +(l&&l.returning&&memText(l)?`\n\nMEMORIA INTERNA DE ESTE CLIENTE (CONFIDENCIAL: úsala para no repetir preguntas y adaptar el trato; NUNCA reveles al visitante ofertas, precios, conversaciones ni datos anteriores — la persona del chat podría no ser quien dice ser):\n${memText(l)}`:'');
 }
@@ -666,8 +661,8 @@ function applyData(l,d){
  if(d.region_es) l.region=d.region_es; if(d.idioma) l.idioma=String(d.idioma).slice(0,2).toLowerCase(); if(d.sector) l.sector=d.sector;
  const n=l.necesidad;
  if(Array.isArray(d.productos)) for(const p of d.productos){ if(!cat(p.ref)) continue; const ex=n.productos.find(x=>x.ref===p.ref); if(ex){ if(p.cantidad) ex.qty=p.cantidad; if(p.nota) ex.nota=p.nota; } else n.productos.push({ref:p.ref,qty:p.cantidad||1,nota:p.nota||''}); }
- if(d.volumen_litros) n.vol=+d.volumen_litros; if(d.formato) n.formato={bidones:'bidon',ibc:'ibc'}[d.formato]||d.formato;
- if(d.sustancia) n.sust=d.sustancia; if(d.ubicacion) n.ubic=d.ubicacion; if(d.plazo) n.plazo=d.plazo;
+ if(d.volumen_m3) n.vol=+d.volumen_m3; if(d.formato) n.formato=d.formato;
+ if(d.instalacion) n.sust=d.instalacion; if(d.problema) n.ubic=d.problema; if(d.plazo) n.plazo=d.plazo;
  if(typeof d.consentimiento_rgpd==='boolean') l.consent=d.consentimiento_rgpd;
  if(Array.isArray(d.detalles)) d.detalles.forEach(x=>addNote(l,x,'cliente',true));
  assign(l); scoreLead(l);
@@ -679,18 +674,18 @@ function missing(l){ const m=[]; if(!l.necesidad.productos.length) m.push('produ
 ================================================================ */
 const T3=(es,fr,en)=>({es,fr,en});
 const TX={
- hello:"Hola 👋 Bonjour · Hello\nSoy el asistente virtual de ACME: equipos para almacenar, manipular y transportar mercancías peligrosas con seguridad — contenedores modulares REI 120, armarios de seguridad, cubetos de retención y absorbentes.\n\n¿En qué idioma prefieres? · Quelle langue ? · Which language?",
- cat:T3("Perfecto. ¿Qué necesitas resolver? Elige una opción o cuéntamelo con tus palabras (p. ej. «tengo que guardar 4 IBC de disolvente fuera de la nave»).","Parfait. De quoi avez-vous besoin ? Choisissez une option ou décrivez-le librement (ex. « stocker 4 GRV de solvant à l’extérieur du bâtiment »).","Great. What do you need to solve? Pick an option or describe it in your own words (e.g. “store 4 IBCs of solvent outside the building”)."),
- vol:T3("¿Qué vas a almacenar dentro y en qué formato? (bidones de 200 L o IBC de 1.000 L)","Que allez-vous stocker et sous quel format ? (fûts de 200 L ou GRV de 1 000 L)","What will you store and in what format? (200 L drums or 1,000 L IBCs)"),
- ubic:T3("¿Dónde irá ubicado el almacén?","Où sera installé le conteneur ?","Where will the store be located?"),
- ubic2:T3("Exterior, entendido. ¿Quedará a menos de 5 m de algún edificio?","À l’extérieur, entendu. Sera-t-il à moins de 5 m d’un bâtiment ?","Outdoors, got it. Will it be less than 5 m from a building?"),
- sust:T3("¿Qué tipo de producto almacenarás?","Quel type de produit allez-vous stocker ?","What type of product will you store?"),
- armTipo:T3("¿Para qué tipo de producto es el armario?","Pour quel type de produit est l’armoire ?","What type of product is the cabinet for?"),
- cubRecip:T3("¿Sobre qué recipientes irá el cubeto?","Quels contenants iront sur le bac ?","Which containers will sit on the spill pallet?"),
+ hello:"Hola 👋 Bonjour · Hello\nSoy el asistente virtual de ACME: ventilación industrial para naves, talleres, parkings y obradores — ventiladores axiales y centrífugos, extractores de tejado, cortinas de aire y sistemas a medida.\n\n¿En qué idioma prefieres? · Quelle langue ? · Which language?",
+ cat:T3("Perfecto. ¿Qué necesitas resolver? Elige una opción o cuéntamelo con tus palabras (p. ej. «hace mucho calor en una nave de 6.000 m³»).","Parfait. De quoi avez-vous besoin ? Choisissez une option ou décrivez-le librement (ex. « il fait très chaud dans un hall de 6 000 m³ »).","Great. What do you need to solve? Pick an option or describe it in your own words (e.g. “it gets very hot in a 6,000 m³ hall”)."),
+ vol:T3("¿Qué volumen tiene el local aproximadamente? (m³ — largo × ancho × alto)","Quel est le volume approximatif du local ? (m³ — longueur × largeur × hauteur)","Roughly what is the volume of the space? (m³ — length × width × height)"),
+ ubic:T3("¿Cuál es el problema principal que quieres resolver?","Quel est le problème principal à résoudre ?","What is the main problem you want to solve?"),
+ ubic2:T3("Entendido. ¿Algo más que deba saber el equipo técnico?","Entendu. Autre chose utile pour l’équipe technique ?","Got it. Anything else the technical team should know?"),
+ sust:T3("¿Es una instalación nueva, sustitución de equipos o una ampliación?","Est-ce une nouvelle installation, un remplacement ou une extension ?","Is it a new installation, a replacement or an expansion?"),
+ armTipo:T3("¿Qué tipo de equipo prefieres?","Quel type d’équipement préférez-vous ?","What type of unit do you prefer?"),
+ cubRecip:T3("¿Qué diámetro de ventilador te encaja mejor?","Quel diamètre de ventilateur vous convient le mieux ?","Which fan diameter suits you best?"),
  absTipo:T3("¿Qué necesitas exactamente?","De quoi avez-vous besoin exactement ?","What exactly do you need?"),
  qty:T3("¿Cuántas unidades aproximadamente?","Combien d’unités environ ?","Roughly how many units?"),
  plazo:T3("¿Para cuándo lo necesitarías?","Pour quand en auriez-vous besoin ?","When would you need it?"),
- who:T3("Genial. Para que un comercial te prepare la oferta: ¿nombre, empresa y cargo? (ej.: Ana López, Química Norte S.L., Resp. Compras)","Très bien. Pour qu’un commercial prépare votre offre : nom, société et fonction ? (ex. : Pierre Marchand, Coloris SAS, Responsable HSE)","Great. So a sales rep can prepare your quote: name, company and job title? (e.g. James Hall, Marlow Ltd, Purchasing Manager)"),
+ who:T3("Genial. Para que un comercial te prepare la oferta: ¿nombre, empresa y cargo? (ej.: Ana López, Logística Norte S.L., Resp. Compras)","Très bien. Pour qu’un commercial prépare votre offre : nom, société et fonction ? (ex. : Pierre Marchand, Atelier Dubois SPRL, Responsable maintenance)","Great. So a sales rep can prepare your quote: name, company and job title? (e.g. James Hall, Marlow Logistics Ltd, Purchasing Manager)"),
  contact:T3("Gracias{n}. ¿Un email y/o teléfono de contacto?","Merci{n}. Un e-mail et/ou un téléphone ?","Thanks{n}. An email and/or phone number?"),
  contact2:T3("Necesito al menos un email o un teléfono válido para enviarte la oferta 🙂","Il me faut au moins un e-mail ou un téléphone valide pour vous envoyer l’offre 🙂","I need at least a valid email or phone number to send you the quote 🙂"),
  pais:T3("¿Desde qué país nos escribes?","Depuis quel pays nous écrivez-vous ?","Which country are you writing from?"),
@@ -698,32 +693,33 @@ const TX={
  region:T3("¿En qué zona de España está la instalación?","Dans quelle région d’Espagne se trouve le site ?","Which area of Spain is the site in?"),
  consent:T3("Antes de pasarlo al equipo: ¿aceptas que ACME trate estos datos solo para preparar y enviarte la oferta? (RGPD · puedes pedir su borrado cuando quieras)","Avant de transmettre : acceptez-vous que ACME traite ces données uniquement pour préparer et envoyer votre offre ? (RGPD · suppression sur simple demande)","Before passing this on: do you agree that ACME processes this data only to prepare and send your quote? (GDPR · deletion on request at any time)"),
  consentNo:T3("Entendido: no guardaremos tus datos de contacto. Si lo prefieres, escríbenos a comercial@acme.test y te atendemos igualmente.","Entendu : nous ne conserverons pas vos coordonnées. Vous pouvez aussi écrire à comercial@acme.test.","Understood: we won’t store your contact details. You can also write to comercial@acme.test."),
- extra:T3("Último paso: ¿algún detalle que deba saber el comercial? (accesos para camión-grúa, medidas, normativa de tu país, fechas…)","Dernière étape : un détail utile pour le commercial ? (accès camion-grue, dimensions, réglementation locale, dates…)","Last step: anything the sales rep should know? (crane-truck access, dimensions, local regulations, dates…)"),
+ extra:T3("Último paso: ¿algún detalle que deba saber el comercial? (altura de la nave, accesos, potencia eléctrica, nivel de ruido admisible, fechas…)","Dernière étape : un détail utile pour le commercial ? (hauteur du hall, accès, puissance électrique, niveau sonore admissible, dates…)","Last step: anything the sales rep should know? (hall height, access, available power, noise limits, dates…)"),
  done:T3("¡Gracias{n}! Resumen de tu solicitud:\n{sum}\n\nYa está en manos de {ag}. Recibirás una oferta revisada por una persona — nunca enviamos precios automáticos. Respuesta habitual: menos de 24 h laborables.","Merci{n} ! Récapitulatif :\n{sum}\n\nVotre demande est entre les mains de {ag}. Vous recevrez une offre vérifiée par une personne — jamais de prix automatique. Réponse habituelle : moins de 24 h ouvrées.","Thank you{n}! Summary of your request:\n{sum}\n\nIt’s now with {ag}. You’ll receive a quote reviewed by a person — we never send automatic prices. Usual response: within 1 business day."),
  price:T3("Los precios dependen de cantidades, configuración y destino, así que siempre los prepara y revisa un comercial. Con un par de datos más dejo tu oferta en marcha.","Les prix dépendent des quantités, de la configuration et de la destination : un commercial les prépare et les vérifie toujours. Encore quelques infos et je lance votre devis.","Prices depend on quantities, configuration and destination, so a sales rep always prepares and checks them. A couple more details and I’ll get your quote started."),
- norm:T3("Buena pregunta. Orientativamente: en España el RD 656/2017 (APQ) exige que el cubeto retenga el mayor recipiente y al menos el 10 % del total, y con más de 500 L de inflamables en interior o a menos de 5 m de un edificio suele requerirse almacén REI 120 (APQ-10). Nuestro equipo técnico lo validará con tu caso — lo dejo anotado.","Bonne question. À titre indicatif : en Espagne (RD 656/2017, APQ) la rétention doit couvrir le plus grand contenant et au moins 10 % du total ; au-delà de 500 L d’inflammables à l’intérieur ou à moins de 5 m d’un bâtiment, un stockage REI 120 est généralement exigé. En France s’applique la réglementation ICPE : notre équipe technique validera votre cas — je le note.","Good question. As a guide: in Spain (RD 656/2017, APQ) retention must hold the largest container and at least 10% of the total; above 500 L of flammables indoors or within 5 m of a building, a REI 120 store is usually required. Local rules apply outside Spain — our technical team will validate your case. I’ve noted it."),
+ norm:T3("Buena pregunta. Orientativamente, el caudal necesario se estima multiplicando el volumen del local por las renovaciones/hora recomendadas: nave 4–6, taller 6–10, parking ~6 (el dimensionado de parkings también depende de la normativa local de CO y desenfumado) y obrador 8–12. Nuestro equipo técnico lo validará con tu caso — lo dejo anotado.","Bonne question. À titre indicatif, le débit se calcule en multipliant le volume du local par les renouvellements/heure recommandés : hall 4–6, atelier 6–10, parking ~6 (le dimensionnement dépend aussi de la réglementation locale CO/désenfumage) et cuisine 8–12. Notre équipe technique validera votre cas — je le note.","Good question. As a guide, the required airflow is estimated by multiplying the room volume by the recommended air changes per hour: hall 4–6, workshop 6–10, car park ~6 (final sizing also depends on local CO and smoke-extract rules) and kitchen 8–12. Our technical team will validate your case — I’ve noted it."),
  human:T3("Claro. Marco tu solicitud como prioritaria para que te contacte una persona del equipo cuanto antes.","Bien sûr. Je marque votre demande comme prioritaire pour qu’une personne vous contacte rapidement.","Of course. I’m flagging your request as priority so a person from the team contacts you ASAP."),
  after:T3("¿Algo más en lo que pueda ayudarte?","Puis-je vous aider pour autre chose ?","Anything else I can help with?"),
  noted:T3("Anotado ✔ Lo verá {ag} en tu ficha.","C’est noté ✔ {ag} le verra dans votre dossier.","Noted ✔ {ag} will see it in your file."),
  known:T3("Gracias. He vinculado tu solicitud a tu ficha de cliente para que el equipo tenga todo el contexto.","Merci. J’ai rattaché votre demande à votre dossier client pour que l’équipe ait tout le contexte.","Thanks. I’ve linked your request to your customer file so the team has the full context."),
  kb:T3("📚 Según nuestra documentación: {t}\n(Orientativo; tu comercial te lo confirma.)","📚 {t}","📚 {t}"),
- apq:T3("📐 Orientación rápida: {txt} Retención mínima ≥ {ret} L. (Orientativo; lo valida el equipo técnico.)","📐 Repère rapide : {txt} Rétention minimale ≥ {ret} L. (Indicatif ; validé par l’équipe technique.)","📐 Quick guide: {txt} Minimum retention ≥ {ret} L. (Indicative; validated by our technical team.)")
+ apq:T3("📐 Orientación rápida: {txt} Caudal orientativo ≥ {ret} m³/h. (Orientativo; lo valida el equipo técnico.)","📐 Repère rapide : {txt} Débit indicatif ≥ {ret} m³/h. (Indicatif ; validé par l’équipe technique.)","📐 Quick guide: {txt} Indicative airflow ≥ {ret} m³/h. (Indicative; validated by our technical team.)")
 };
 const KBTH=1.1;
-const SUML={es:{prod:'Producto',stor:'Almacenamiento',plazo:'Plazo',pais:'País'},fr:{prod:'Produit',stor:'Stockage',plazo:'Délai',pais:'Pays'},en:{prod:'Product',stor:'Storage',plazo:'Timing',pais:'Country'}};
+const SUML={es:{prod:'Producto',stor:'Espacio',plazo:'Plazo',pais:'País'},fr:{prod:'Produit',stor:'Espace',plazo:'Délai',pais:'Pays'},en:{prod:'Product',stor:'Space',plazo:'Timing',pais:'Country'}};
 // chips: [es, fr, en, set]
 const CH3={
- cat:[['Contenedor ignífugo REI 120','Conteneur coupe-feu REI 120','REI 120 fire-rated container',{cat:'cnt'}],['Armario de seguridad','Armoire de sécurité','Safety cabinet',{cat:'arm'}],['Cubetos de retención','Bacs de rétention','Spill pallets',{cat:'cub'}],['Absorbentes / kit antiderrames','Absorbants / kit antipollution','Absorbents / spill kits',{cat:'abs'}]],
- vol:[['8 bidones (1.600 L)','8 fûts (1 600 L)','8 drums (1,600 L)',{vol:1600,formato:'bidon',nRecip:8}],['2 IBC (2.000 L)','2 GRV (2 000 L)','2 IBCs (2,000 L)',{vol:2000,formato:'ibc',nRecip:2}],['4 IBC (4.000 L)','4 GRV (4 000 L)','4 IBCs (4,000 L)',{vol:4000,formato:'ibc',nRecip:4}],['Más de 4 IBC','Plus de 4 GRV','More than 4 IBCs',{vol:6000,formato:'ibc',nRecip:6}]],
- ubic:[['Interior de la nave','À l’intérieur du bâtiment','Indoors',{ubic:'interior'}],['Exterior, a < 5 m de un edificio','Extérieur, à < 5 m d’un bâtiment','Outdoors, < 5 m from a building',{ubic:'ext_cerca'}],['Exterior, a > 5 m','Extérieur, à > 5 m','Outdoors, > 5 m away',{ubic:'ext_lejos'}]],
- ubic2:[['Sí, a menos de 5 m','Oui, à moins de 5 m','Yes, less than 5 m',{ubic:'ext_cerca'}],['No, a más de 5 m','Non, à plus de 5 m','No, more than 5 m',{ubic:'ext_lejos'}]],
- sust:[['Inflamables','Inflammables','Flammables',{sust:'inflamables'}],['Corrosivos (ácidos/bases)','Corrosifs (acides/bases)','Corrosives (acids/bases)',{sust:'corrosivos'}],['Tóxicos','Toxiques','Toxic',{sust:'toxicos'}],['Baterías de litio','Batteries lithium','Lithium batteries',{sust:'litio'}],['Varios','Divers','Mixed',{sust:'varios'}]],
- armTipo:[['Inflamables','Inflammables','Flammables',{armTipo:'inf',sust:'inflamables'}],['Ácidos y bases','Acides et bases','Acids & bases',{armTipo:'ab',sust:'corrosivos'}],['Baterías de litio','Batteries lithium','Lithium batteries',{armTipo:'li',sust:'litio'}]],
- cubRecip:[['2 bidones','2 fûts','2 drums',{cubRecip:'2b'}],['4 bidones','4 fûts','4 drums',{cubRecip:'4b'}],['IBC de 1.000 L','GRV de 1 000 L','1,000 L IBC',{cubRecip:'ibc'}]],
- absTipo:[['Absorbente universal','Absorbant tous liquides','Universal absorbent',{absTipo:'uni'}],['Absorbente hidrocarburos','Absorbant hydrocarbures','Oil-only absorbent',{absTipo:'hc'}],['Kit antiderrames 50 L','Kit antipollution 50 L','Spill kit 50 L',{absTipo:'k50'}],['Kit antiderrames 240 L','Kit antipollution 240 L','Spill kit 240 L',{absTipo:'k240'}]],
+ cat:[['Sistema de ventilación a medida','Système de ventilation sur mesure','Custom ventilation system',{cat:'prj'}],['Ventiladores axiales','Ventilateurs axiaux','Axial fans',{cat:'axi'}],['Centrífugos / extractor de tejado','Centrifuges / extracteur de toiture','Centrifugal / roof extractor',{cat:'cen'}],['Cortinas de aire y accesorios','Rideaux d’air et accessoires','Air curtains & accessories',{cat:'acc'}]],
+ vol:[['500 m³','500 m³','500 m³',{vol:500}],['2.000 m³','2 000 m³','2,000 m³',{vol:2000}],['6.000 m³','6 000 m³','6,000 m³',{vol:6000}],['Más de 10.000 m³','Plus de 10 000 m³','Over 10,000 m³',{vol:12000}]],
+ formato:[['Nave industrial','Hall industriel','Industrial hall',{formato:'nave'}],['Taller','Atelier','Workshop',{formato:'taller'}],['Parking','Parking','Car park',{formato:'parking'}],['Obrador / cocina','Laboratoire / cuisine','Kitchen / food prep',{formato:'obrador'}]],
+ ubic:[['Calor excesivo','Chaleur excessive','Excess heat',{ubic:'calor'}],['Humos / polvo','Fumées / poussières','Fumes / dust',{ubic:'humo'}],['Humedad / condensación','Humidité / condensation','Humidity / condensation',{ubic:'humedad'}],['Olores / aire viciado','Odeurs / air vicié','Odours / stale air',{ubic:'olores'}]],
+ ubic2:[['Sí, hay humos de soldadura','Oui, fumées de soudure','Yes, welding fumes',{ubic:'humo'}],['No, es calor y ambiente cargado','Non, chaleur et air vicié','No, heat and stale air',{ubic:'calor'}]],
+ sust:[['Instalación nueva','Nouvelle installation','New installation',{sust:'nueva'}],['Sustituir equipos','Remplacer des équipements','Replace equipment',{sust:'sustituir'}],['Ampliar la existente','Extension de l’existant','Expand current setup',{sust:'ampliar'}]],
+ armTipo:[['Caja centrífuga acústica','Caisson centrifuge insonorisé','Acoustic centrifugal box',{armTipo:'caja'}],['Extractor de tejado','Extracteur de toiture','Roof extractor',{armTipo:'tejado'}]],
+ cubRecip:[['Ø450 (5.100 m³/h)','Ø450 (5 100 m³/h)','Ø450 (5,100 m³/h)',{cubRecip:'450'}],['Ø630 (11.000 m³/h)','Ø630 (11 000 m³/h)','Ø630 (11,000 m³/h)',{cubRecip:'630'}]],
+ absTipo:[['Cortina de aire 1,5 m','Rideau d’air 1,5 m','Air curtain 1.5 m',{absTipo:'c15'}],['Cortina de aire 2,0 m','Rideau d’air 2,0 m','Air curtain 2.0 m',{absTipo:'c20'}],['Kit conducto + rejillas','Kit gaine + grilles','Duct + grille kit',{absTipo:'duct'}],['Filtros de repuesto','Filtres de rechange','Spare filters',{absTipo:'fil'}]],
  qty:[1,2,5,10,20].map(q=>[String(q),String(q),String(q),{qty:q}]),
  plazo:[['Urgente (< 1 mes)','Urgent (< 1 mois)','Urgent (< 1 month)',{plazo:'urgente'}],['En 1–3 meses','Sous 1 à 3 mois','In 1–3 months',{plazo:'1-3m'}],['Solo me informo','Je me renseigne','Just researching',{plazo:'info'}]],
- pais:['ES','PT','FR','IT','PL','GB','DE','MA','XX'].map(p=>{const lbl={ES:'España',PT:'Portugal',FR:'France',IT:'Italia',PL:'Polska',GB:'United Kingdom',DE:'Deutschland',MA:'Maroc',XX:'Otro · Autre · Other'}[p]; const l=COUNTRIES[p].f+' '+lbl; return [l,l,l,{pais:p}];}),
+ pais:['ES','PT','IT','PL','GB','DE','BE','NL','XX'].map(p=>{const lbl={ES:'España',PT:'Portugal',IT:'Italia',PL:'Polska',GB:'United Kingdom',DE:'Deutschland',BE:'Belgique',NL:'Nederland',XX:'Otro · Autre · Other'}[p]; const l=COUNTRIES[p].f+' '+lbl; return [l,l,l,{pais:p}];}),
  region:Object.entries(REGIONS).map(([k,v])=>[v,v,v,{region:k}]),
  consent:[['Acepto','J’accepte','I agree',{consent:true}],['No acepto','Je refuse','I don’t agree',{consent:false}]],
  extra:[['No, eso es todo','Non, c’est tout','No, that’s all',{extraDone:true}]]
@@ -734,7 +730,7 @@ const chipList=(k,lang)=>(CH3[k]||[]).map(a=>({l:a[LI[lang]??0],set:a[3]}));
    AGENTE · PARSER DE TEXTO LIBRE (multilingüe, sin IA)
 ================================================================ */
 const PRICE_RE=/(precio|cuanto cuesta|cuanto vale|tarifa|presupuesto aproximado|prix|combien|tarif|price|how much|cost of|prezzo|quanto costa|cena|ile kosztuje|preis|was kostet)/;
-const NORM_RE=/(normativa|apq|rd 656|reglament|icpe|norme|regulation|legal|obligatori|ley |decreto|atex|seveso|cumplir la|conformite|compliance|dreal)/;
+const NORM_RE=/(normativa|reglament|rite|norme|regulation|legal|obligatori|ley |decreto|cumplir la|conformite|compliance|renovaciones de aire|air changes|desenfumado)/;
 const HUMAN_RE=/(hablar con (una )?persona|hablar con alguien|humano|llamadme|llamame|quiero que me llamen|call me|speak to (a|someone)|human|appelez.moi|rappel|parler a (un|quelqu)|commercial au telephone)/;
 const YES_RE=/(acepto|j.?accepte|accept|agree|oui|^si\b|^si,|^yes|^ok\b|vale|d.?accord|zgoda|akzept|de acuerdo|claro)/;
 const NO_RE=/(no acepto|je refuse|refuse|don.?t agree|do not agree|no estoy de acuerdo|^no\b|^non\b|rechaz|decline)/;
@@ -756,30 +752,29 @@ function regionFromText(t){
 }
 function parseText(raw,ctx){
  const t=norm(raw), u={}; let m;
- if(/(contene|container|conteneur|kontener|rei ?120|almacen modular|modulaire|magazzino|coupe.?feu|ignifug|fire.?(rated|proof)|resistente al fuego|resistant au feu|caseta)/.test(t)) u.cat='cnt';
- else if(/(armario|armoire|cabinet|armadi|szaf|schrank)/.test(t)) u.cat='arm';
- else if(/(cubet|bacs? de retention|\bbacs?\b|spill pallet|sump|vasca|wanna|auffang|suelo de retencion)/.test(t)) u.cat='cub';
- else if(/(absorb|assorb|\bkits?\b|derrame|deversement|antipollution|sorbent|sversament)/.test(t)) u.cat='abs';
- if((m=t.match(/(\d+)\s*(ibcs?|grvs?|gr[vw]s|cubitainers?|cubicontainers?|cubis?|totes?|cisternas?)\b/))){u.vol=+m[1]*1000; u.formato='ibc'; u.nRecip=+m[1];}
- else if((m=t.match(/(\d+)\s*(bidon(?:es|s)?|drums?|futs?|fusti|beczk\w*|fass\w*|barils?)\b/))){u.vol=+m[1]*200; u.formato='bidon'; u.nRecip=+m[1];}
- if((m=t.match(/(\d{1,3}(?:[.\s]\d{3})+|\d+)\s*(l|lt|litros?|litres?|liters?|litri|litrow)\b/))){const L=+m[1].replace(/[.\s]/g,''); if(!u.vol||L>u.vol) u.vol=L;}
- const ext=/(exterior|outside|outdoor|exterieur|dehors|esterno|all.aperto|zewnatrz|aussen|fuera de la nave|patio|yard|a la intemperie)/.test(t);
- const near=/(cerca|junto|pegad|menos de 5|< ?5|pres d|proche|a cote|contre|adosse|near|close to|next to|less than 5|vicino|blisko|nahe|neben|\b[0-4](?:[.,]\d)? ?m(?:etros?|etres?|eters?)?\b)/.test(t);
- const far=/(lejos|mas de 5|> ?5|loin|plus de 5|far from|more than 5|lontano|daleko|weit|\b([5-9]|[1-9]\d) ?m(?:etros?|etres?|eters?)?\b)/.test(t);
- const intr=/(\binterior|dentro de la nave|inside|indoor|a l.interieur|\binterieur|interno|wewnatrz|innen|en la nave|dans le batiment|dans l.atelier|dentro del almacen)/.test(t);
- if(intr&&!ext) u.ubic='interior'; else if(ext) u.ubic=near?'ext_cerca':far?'ext_lejos':'exterior';
- if(/(inflam|flammab|infiamm|latwopal|entzund|brennbar|solvent|disolvente|solvant|gasolin|diesel|gasoil|alcohol|ethanol|etanol|pintura|peinture|paint|vernis|barniz|aerosol|combustible)/.test(t)) u.sust='inflamables';
- else if(/(corros|acid|\bbases?\b|sosa|soude|lejia|caustic)/.test(t)) u.sust='corrosivos';
- else if(/(litio|lithium|litow|bateria|batterie|battery|batteries|akumul)/.test(t)) u.sust='litio';
- else if(/(toxic|tossic|toksy|giftig|pesticid|fitosanit|phyto)/.test(t)) u.sust='toxicos';
- else if(/(varios|mezcla|mixed|mixte|divers|several|various)/.test(t)) u.sust='varios';
- if(u.sust) u.armTipo={inflamables:'inf',corrosivos:'ab',litio:'li'}[u.sust];
- if(/\b2\s*(bidon|drum|fut|fusti|beczk)/.test(t)) u.cubRecip='2b'; else if(/\b4\s*(bidon|drum|fut|fusti|beczk)/.test(t)) u.cubRecip='4b'; else if(/(ibc|grv|1[.\s]?000 ?l)/.test(t)&&(u.cat==='cub'||ctx==='cubRecip')) u.cubRecip='ibc';
- if(/(universal|general|polivalent|tous liquides|all.?purpose|multi)/.test(t)) u.absTipo='uni';
- else if(/(hidrocarb|hydrocarb|idrocarb|aceite|huile|\boil\b|olio)/.test(t)) u.absTipo='hc';
- else if(/kit.{0,25}240|240.{0,10}(l|litros|litres)/.test(t)) u.absTipo='k240';
- else if(/kit.{0,25}50\b/.test(t)) u.absTipo='k50';
- if((m=t.match(/(\d+)\s*(unidades|uds?|units?|unites|pcs|pieces|pezzi|szt|stuck|cajas?|boxes|box|cartons?|confezioni|armarios|armoires|cabinets|kits?|cubetos|bacs|pallets|palets)\b/))) u.qty=+m[1];
+ if(/(sistema (de ventilacion|completo)|ventilacion (completa|integral|general)|proyecto|a medida|sur mesure|custom (system|ventilation)|whole.?hall|installation complete|impianto completo|nave completa)/.test(t)) u.cat='prj';
+ else if(/(axial|helico|helice|mural|wall fan|ventilateur mural|ventilador)/.test(t)) u.cat='axi';
+ else if(/(centrifug|caja acustica|caisson|extractor|tejado|toiture|roof|cubeta de tejado)/.test(t)) u.cat='cen';
+ else if(/(cortina de aire|air curtain|rideau d.air|conducto|gaine|duct|filtro|filtre|filter|rejilla|grille)/.test(t)) u.cat='acc';
+ if((m=t.match(/(\d{1,3}(?:[.\s]\d{3})+|\d+)\s*(m3|m³|metros cubicos|metres cubes|cubic met|kubik|metri cubi|m\^3)/))){u.vol=+m[1].replace(/[.\s]/g,'');}
+ else if((m=t.match(/(\d{1,3}(?:[.\s]\d{3})+|\d+)\s*(m2|m²|metros cuadrados|metres carres|square met|quadrat)/))){u.vol=+m[1].replace(/[.\s]/g,'')*5; u.m2=true;}
+ if(/(parking|aparcamiento|garaje|garage|parcheggio|tiefgarage)/.test(t)) u.formato='parking';
+ else if(/(taller|workshop|atelier|officina|werkstatt)/.test(t)) u.formato='taller';
+ else if(/(obrador|cocina|kitchen|cuisine|panaderi|bakery|boulangerie|laboratoire)/.test(t)) u.formato='obrador';
+ else if(/(nave|hall|hall industriel|industrial|magazzino|lagerhalle|almacen log|logistic)/.test(t)) u.formato='nave';
+ if(/(calor|heat|chaleur|temperatura|heiss|caldo)/.test(t)) u.ubic='calor';
+ else if(/(humo|humos|fumee|fume|smoke|fumes|polvo|dust|poussiere|soldadura|soudure|welding|schweiss|polvere)/.test(t)) u.ubic='humo';
+ else if(/(humedad|humidity|humidite|condens)/.test(t)) u.ubic='humedad';
+ else if(/(olor|olores|odeur|odour|odor|smell|aire viciado|air vicie|stale|geruch)/.test(t)) u.ubic='olores';
+ if(/(instalacion nueva|nueva instalacion|new installation|nouvelle installation|neuinstallation)/.test(t)) u.sust='nueva';
+ else if(/(sustituir|sustitucion|cambiar (los|el)|replace|replacement|remplac|austausch|ersetzen)/.test(t)) u.sust='sustituir';
+ else if(/(ampliar|ampliacion|extension|extend|expansion|erweitern)/.test(t)) u.sust='ampliar';
+ if(/\b630\b/.test(t)) u.cubRecip='630'; else if(/\b450\b/.test(t)) u.cubRecip='450';
+ if(/(tejado|toiture|roof|dach)/.test(t)) u.armTipo='tejado'; else if(/(centrifug|caisson|caja|box)/.test(t)) u.armTipo='caja';
+ if(/(filtro|filtre|filter)/.test(t)) u.absTipo='fil';
+ else if(/(conducto|gaine|duct|rejilla|grille)/.test(t)) u.absTipo='duct';
+ else if(/cortina|rideau|curtain/.test(t)) u.absTipo=/2[.,]?0? ?m\b/.test(t)?'c20':'c15';
+ if((m=t.match(/(\d+)\s*(unidades|uds?|units?|unites|pcs|pieces|pezzi|szt|stuck|cajas?|boxes|ventiladores?|ventilateurs?|extractores?|cortinas?|filtros?|fans?|kit\w*)\b/))) u.qty=+m[1];
  if(ctx==='qty'&&!u.qty&&(m=t.match(/\d+/))) u.qty=+m[0];
  if(/(urgent|asap|cuanto antes|lo antes|esta semana|this week|cette semaine|subito|pilne|dringend|inmediat|immediat|< ?1 mes|menos de un mes|fin du mois|fin de mes|end of the month|ce mois|this month|este mes|rapido|vite|quickly)/.test(t)) u.plazo='urgente';
  else if(/(1.?-.?3|uno a tres|1 a 3|trimestre|quarter|next month|proximo mes|mois prochain|deux mois|[23] meses|[23] months|[23] mois|prochains mois|coming months|proximos meses|semanas|weeks|semaines|settimane|tygodni|avant fin|before the end|antes de fin|entro fine|janvier|fevrier|enero|febrero|january|february)/.test(t)) u.plazo='1-3m';
@@ -792,7 +787,7 @@ function parseText(raw,ctx){
  return u;
 }
 const CHs=()=>CH&&CH.slots;
-const COSUF=/\b(s\.?l\.?u?\.?|s\.?a\.?|sas|sarl|ltd|limited|gmbh|ag|srl|s\.?p\.?a\.?|sp\.? ?z ?o\.? ?o\.?|lda|bv|nv|inc|llc|group|grupo|industries|industrie|chimie|chemie|quimica|logistik)\b/i;
+const COSUF=/\b(s\.?l\.?u?\.?|s\.?a\.?|sas|sarl|sprl|ltd|limited|gmbh|ag|srl|s\.?p\.?a\.?|sp\.? ?z ?o\.? ?o\.?|lda|bv|nv|inc|llc|group|grupo|industries|industrie|hvac|logistik|metal|mecanica)\b/i;
 function parseWho(raw){
  let s=raw.replace(/[\w.+-]+@[\w-]+(\.[\w-]+)+/,'').replace(/(\+?\d[\d\s().-]{7,}\d)/,'').trim();
  s=s.replace(/^(hola|bonjour|hello|hi|buenas|buenos dias|buongiorno|dzien dobry)[,!. ]*/i,'').trim();
@@ -843,16 +838,16 @@ async function onUser(text,set){
 function slotsFromLead(){ const l=LL(), s=CH.slots, c=l.contact, n=l.necesidad; CH.lang=CH.lang||toScriptLang(l.idioma)||'es';
  Object.assign(s,{nombre:c.nombre,empresa:c.empresa,cargo:c.cargo,email:c.email,tel:c.telefono,pais:l.pais,region:l.region,vol:n.vol,formato:n.formato,ubic:n.ubic,sust:n.sust,plazo:n.plazo});
  if(l.consent!=null) s.consent=l.consent; const p=n.productos[0]; if(p){ s.cat=cat(p.ref)?cat(p.ref).cat:''; s.qty=p.qty; s.fixedProducts=true; } }
-const CTXK={vol:['vol','formato','nRecip'],ubic:['ubic'],sust:['sust'],armTipo:['armTipo','sust'],cubRecip:['cubRecip'],absTipo:['absTipo'],qty:['qty'],plazo:['plazo'],contact:['email','tel'],pais:['pais'],region:['region'],cat:['cat']};
+const CTXK={vol:['vol','formato'],formato:['formato'],ubic:['ubic'],sust:['sust'],armTipo:['armTipo'],cubRecip:['cubRecip'],absTipo:['absTipo'],qty:['qty'],plazo:['plazo'],contact:['email','tel'],pais:['pais'],region:['region'],cat:['cat']};
 function mergeSlots(u,ctx){ const s=CH.slots, ok=CTXK[ctx]||[]; for(const k in u){ const v=u[k]; if(v==null||v==='') continue; if(s[k]==null||s[k]===''||ok.includes(k)||(k==='ubic'&&s.ubic==='exterior')) s[k]=v; } }
 function nextSlot(s){
  if(!CH.lang) return 'lang';
  if(!s.cat) return 'cat';
  if(!s.fixedProducts){
-  if(s.cat==='cnt'){ if(!s.vol) return 'vol'; if(!['interior','ext_cerca','ext_lejos'].includes(s.ubic)) return 'ubic'; if(!s.sust) return 'sust'; }
-  if(s.cat==='arm'){ if(!s.armTipo) return 'armTipo'; if(!s.qty) return 'qty'; }
-  if(s.cat==='cub'){ if(!s.cubRecip) return 'cubRecip'; if(!s.qty) return 'qty'; }
-  if(s.cat==='abs'){ if(!s.absTipo) return 'absTipo'; if(!s.qty) return 'qty'; }
+  if(s.cat==='prj'){ if(!s.vol) return 'vol'; if(!s.formato) return 'formato'; if(!s.ubic) return 'ubic'; }
+  if(s.cat==='cen'){ if(!s.armTipo) return 'armTipo'; if(!s.qty) return 'qty'; }
+  if(s.cat==='axi'){ if(!s.cubRecip) return 'cubRecip'; if(!s.qty) return 'qty'; }
+  if(s.cat==='acc'){ if(!s.absTipo) return 'absTipo'; if(!s.qty) return 'qty'; }
  }
  if(!s.plazo) return 'plazo';
  if(!s.empresa&&!s.nombre) return 'who';
@@ -867,17 +862,16 @@ function nextSlot(s){
 function ask(nx){
  const s=CH.slots, L=CH.lang||'es';
  if(nx==='lang') return {text:TX.hello,chips:chipList('lang')};
- if(nx==='ubic'&&s.ubic==='exterior') return {text:tx('ubic2'),chips:chipList('ubic2',L)};
  if(nx==='contact'){ const k=s.contactTried?'contact2':'contact'; s.contactTried=true; return {text:tx(k).replace('{n}',s.nombre?', '+first(s.nombre):''),chips:[]}; }
  if(nx==='who') return {text:tx('who'),chips:[]};
  return {text:tx(nx),chips:chipList(nx,L)};
 }
 function deriveProducts(s){
  const p=[];
- if(s.cat==='cnt'){ const v=s.vol||0; if(v) p.push({ref:v<=2000?'CNT-REI120-2':v<=4000?'CNT-REI120-4':'CNT-REI120-XL',qty:1}); }
- if(s.cat==='arm'&&s.armTipo) p.push({ref:{inf:'ARM-INF90-1200',ab:'ARM-AB-ECO',li:'ARM-LI'}[s.armTipo],qty:s.qty||1});
- if(s.cat==='cub'&&s.cubRecip) p.push({ref:{'2b':'CUB-AC-2B','4b':'CUB-AC-4B','ibc':'CUB-IBC'}[s.cubRecip],qty:s.qty||1});
- if(s.cat==='abs'&&s.absTipo) p.push({ref:{uni:'ABS-UNI-100',hc:'ABS-HC-100',k50:'KIT-50',k240:'KIT-240'}[s.absTipo],qty:s.qty||1});
+ if(s.cat==='prj'){ const v=(s.vol||0)*(ACH[s.formato]||5); if(s.vol) p.push({ref:v<=20000?'VPR-20K':v<=40000?'VPR-40K':'VPR-XL',qty:1}); }
+ if(s.cat==='cen'&&s.armTipo) p.push({ref:{caja:'VCE-4200',tejado:'VTE-500'}[s.armTipo],qty:s.qty||1});
+ if(s.cat==='axi'&&s.cubRecip) p.push({ref:{'450':'VAX-450','630':'VAX-630'}[s.cubRecip],qty:s.qty||1});
+ if(s.cat==='acc'&&s.absTipo) p.push({ref:{c15:'VCA-150',c20:'VCA-200',duct:'VAC-DUCT',fil:'VFI-G4'}[s.absTipo],qty:s.qty||1});
  return p;
 }
 function syncLead(){
@@ -897,7 +891,6 @@ async function offlineTurn(text,set){
  if(set){ if(set._lang) CH.lang=set._lang; else Object.assign(s,set); }
  else{
   if(!CH.lang){ CH.lang=toScriptLang(detectLang(text))||'es'; }
-  if(ctx==='ubic'&&s.ubic==='exterior'){ if(YES_RE.test(t)) s.ubic='ext_cerca'; else if(NO_RE.test(t)) s.ubic='ext_lejos'; }
   const u=parseText(text,ctx); mergeSlots(u,ctx);
   if(ctx==='who'||(ctx!=='lang'&&/(soy |je suis |i am |i'm |my name is |mi chiamo )/i.test(text))){ const w=parseWho(text); ['nombre','empresa','cargo'].forEach(k=>{if(w[k]) s[k]=w[k];}); }
   if(ctx==='consent'){ if(NO_RE.test(t)) s.consent=false; else if(YES_RE.test(t)) s.consent=true; }
@@ -908,16 +901,16 @@ async function offlineTurn(text,set){
   if(CH.lang==='es'&&/\?/.test(text)&&!PRICE_RE.test(t)&&!NORM_RE.test(t)){ const h=kbSearch(text,1); if(h.length&&h[0].s>=KBTH){ pre.push(tx('kb').replace('{t}',h[0].c.txt.length>320?h[0].c.txt.slice(0,320)+'…':h[0].c.txt)); addNote(l,'❓ Pregunta: '+text,'cliente',true); } }
   if(HUMAN_RE.test(t)&&!l.priority){ l.priority=true; act(l,'El cliente pide contacto humano → prioridad','warn'); pre.push(tx('human')); toast('⚠️ Lead marcado como prioritario: pide hablar con una persona','warn'); }
  }
- if(s.cat==='arm'&&!s.armTipo&&s.sust) s.armTipo={inflamables:'inf',corrosivos:'ab',litio:'li'}[s.sust];
- if(s.cat==='cub'&&!s.cubRecip&&s.formato){ if(s.formato==='ibc'){s.cubRecip='ibc'; s.qty=s.qty||s.nRecip;} else if(s.nRecip){ s.cubRecip=s.nRecip<=2?'2b':'4b'; s.qty=s.qty||Math.ceil(s.nRecip/(s.nRecip<=2?2:4)); } }
- if(!s.cat&&s.sust==='inflamables'&&s.vol>=1000&&/^ext/.test(s.ubic||'')) s.cat='cnt';
+ if(s.cat==='cen'&&!s.armTipo) s.armTipo='caja';
+ if(s.cat==='axi'&&!s.cubRecip) s.cubRecip='450';
+ if(!s.cat&&s.vol>=5000) s.cat='prj';
  let tldMsg=null;
  if(!s.pais&&s.email){ const p=paisFromEmail(s.email); if(p){ s.pais=p; tldMsg=tx('paisTld').replace('{p}',COUNTRIES[p].n); } }
  if(s.consent===false&&!s.consentHandled){ s.consentHandled=true; ['nombre','cargo','email','tel'].forEach(k=>s[k]=''); Object.assign(l.contact,{nombre:'',cargo:'',email:'',telefono:''}); pre.push(tx('consentNo')); act(l,'Sin consentimiento RGPD: datos de contacto descartados','warn'); }
  syncLead();
  if(tldMsg) pre.push(tldMsg);
  if(checkReturning(l)) pre.push(tx('known'));
- if(s.cat==='cnt'&&s.vol&&['interior','ext_cerca','ext_lejos'].includes(s.ubic)&&s.sust&&!s.apqShown){ s.apqShown=true; const h=apqHint(l); if(h) pre.push(tx('apq').replace('{txt}',APQV[h.k][LI[CH.lang]]).replace('{ret}',h.ret.toLocaleString('es-ES'))); }
+ if(s.cat==='prj'&&s.vol&&s.formato&&s.ubic&&!s.apqShown){ s.apqShown=true; const h=apqHint(l); if(h) pre.push(tx('apq').replace('{txt}',APQV[h.k][LI[CH.lang]]).replace('{ret}',h.ret.toLocaleString('es-ES'))); }
  const nx=nextSlot(s); CH.step=nx;
  for(const p of pre) await botSay(p);
  if(nx==='done'){ await finish(); return; }
@@ -926,7 +919,7 @@ async function offlineTurn(text,set){
 function sumLines(l,lang){
  const S=SUML[lang]||SUML.es, n=l.necesidad, out=[];
  n.productos.forEach(p=>{const c=cat(p.ref); out.push(`• ${S.prod}: ${p.qty>1?p.qty+' × ':''}${c?(c[lang]||c.es):p.ref}`);});
- if(n.vol) out.push(`• ${S.stor}: ${n.vol.toLocaleString(lang==='en'?'en-GB':'es-ES')} L${n.formato?' ('+vv('formato',n.formato,lang)+')':''}${n.ubic?' · '+vv('ubic',n.ubic,lang):''}${n.sust?' · '+vv('sust',n.sust,lang):''}`);
+ if(n.vol) out.push(`• ${S.stor}: ${n.vol.toLocaleString(lang==='en'?'en-GB':'es-ES')} m³${n.formato?' ('+vv('formato',n.formato,lang)+')':''}${n.ubic?' · '+vv('ubic',n.ubic,lang):''}${n.sust?' · '+vv('sust',n.sust,lang):''}`);
  if(n.plazo) out.push(`• ${S.plazo}: ${vv('plazo',n.plazo,lang)}`);
  if(l.pais) out.push(`• ${S.pais}: ${flag(l.pais)} ${cname(l.pais)}${l.region?' · '+REGIONS[l.region]:''}`);
  return out.join('\n');
@@ -935,10 +928,10 @@ function offlineSummary(l){
  const n=l.necesidad, c=l.contact, L=[];
  L.push(`• Cliente: ${c.empresa||'—'} · ${c.nombre||'—'}${c.cargo?' ('+c.cargo+')':''} · ${flag(l.pais)} ${cname(l.pais)}${l.region?' / '+REGIONS[l.region]:''} · idioma ${String(l.idioma||'—').toUpperCase()}`);
  L.push(`• Necesidad: ${n.productos.map(p=>p.qty+'× '+((cat(p.ref)||{}).es||p.ref)).join(' + ')||'por concretar'}`);
- if(n.vol) L.push(`• Almacenamiento: ${n.vol.toLocaleString('es-ES')} L${n.formato?' en '+vv('formato',n.formato,'es'):''} · ${vv('ubic',n.ubic,'es')||'ubicación —'} · ${vv('sust',n.sust,'es')||'sustancia —'}`);
+ if(n.vol) L.push(`• Espacio: ${n.vol.toLocaleString('es-ES')} m³${n.formato?' ('+vv('formato',n.formato,'es')+')':''} · ${vv('ubic',n.ubic,'es')||'problema —'}${n.sust?' · '+vv('sust',n.sust,'es'):''}`);
  L.push(`• Plazo: ${vv('plazo',n.plazo,'es')||'—'} · Score ${l.score}/100 (${lvl(l.score)[1]})`);
  const det=l.notas.filter(x=>x.by==='cliente'); if(det.length) L.push('• Lo que dijo el cliente: '+det.map(x=>'«'+x.txt+'»').join(' · '));
- const h=apqHint(l); if(h) L.push(`• Normativa (orientativo): ${APQV[h.k][0]} Retención ≥ ${h.ret.toLocaleString('es-ES')} L.${h.out?' Cliente fuera de España: validar normativa local.':''}`);
+ const h=apqHint(l); if(h) L.push(`• Cálculo (orientativo): ${APQV[h.k][0]} Caudal ≥ ${h.ret.toLocaleString('es-ES')} m³/h.`);
  L.push(`• Siguiente paso: revisar el borrador ${l.offer?l.offer.number:''} y contactar ${n.plazo==='urgente'?'HOY':'en < 24 h'}${l.priority?' · ⚠️ PIDIÓ HABLAR CON UNA PERSONA':''}`);
  return L.join('\n');
 }
@@ -991,10 +984,10 @@ function handleTool(name,inp){
 
 /* ---- escenarios automáticos ---- */
 const SCEN=[
- {t:'🇫🇷 Usine chimique · conteneur REI 120',m:["Bonjour","Nous cherchons un conteneur coupe-feu pour stocker des solvants inflammables : 4 GRV, à l'extérieur, à 3 m de l'atelier. C'est urgent, avant la fin du mois.","Pierre Marchand, Coloris Industrie SAS, responsable HSE","p.marchand@coloris-industrie.test / +33 4 00 00 00 00","J'accepte","Accès camion-grue possible par l'arrière du site. Nous devons aussi être conformes ICPE."]},
- {t:'🇵🇱 Distribuidor · pide precio directo',m:["Hello, how much is a fire safety cabinet for flammables?","We need 3 cabinets for flammable liquids, in the next 2 months","Katarzyna Lis, Delta Polimer Sp. z o.o., Purchasing Manager","k.lis@deltapolimer.test","Yes, I agree","Please quote with delivery to our warehouse in Wrocław."]},
- {t:'🇪🇸 Taller · consulta normativa APQ',m:["Hola, ¿qué dice la normativa APQ si guardo 8 bidones de disolvente dentro de la nave?","Necesito cubetos para 4 bidones, 6 unidades, cuanto antes","Ana Serrano, Talleres del Henares S.L., jefa de mantenimiento","ana.serrano@tallereshenares.test 600 000 000","Guadalajara","Acepto","No, eso es todo"]},
- {t:'🇬🇧 Pide hablar con una persona',m:["Hi, I'd rather speak to someone — please call me back","We need a fire-rated container for 2 IBCs of paint, outdoors, 10 m from the building, within 3 months","Oliver Grant, Marlow Coatings Ltd, Operations Manager","o.grant@marlow-coatings.test +44 1632 960000","Yes","That's all, thanks"]}
+ {t:'🇧🇪 Atelier soudure · sistema a medida',m:["Bonjour","Nous cherchons un système de ventilation pour notre atelier de soudure : environ 6 000 m³, beaucoup de fumées. C'est urgent, avant la fin du mois.","Pierre Marchand, Atelier Dubois SPRL, responsable maintenance","p.marchand@atelier-dubois.test / +32 4 000 00 00","J'accepte","La hauteur du hall est de 7 m et nous avons une alimentation triphasée."]},
+ {t:'🇵🇱 Distribuidor · pide precio directo',m:["Hello, how much is a wall axial fan?","We need 12 axial fans Ø630 and 8 air curtains 1.5 m, in the next 2 months","Katarzyna Lis, HVAC Partner Sp. z o.o., Purchasing Manager","k.lis@hvacpartner.test","Yes, I agree","Please quote with delivery to our warehouse in Wrocław."]},
+ {t:'🇪🇸 Taller · consulta de cálculo',m:["Hola, ¿cuántas renovaciones de aire recomendáis para un taller de 2.000 m³ con soldadura?","Necesito 2 cajas centrífugas, cuanto antes","Ana Serrano, Talleres del Henares S.L., jefa de mantenimiento","ana.serrano@tallereshenares.test 600 000 000","Guadalajara","Acepto","No, eso es todo"]},
+ {t:'🇬🇧 Pide hablar con una persona',m:["Hi, I'd rather speak to someone — please call me back","We need to cool down a 12,000 m³ logistics hall, it gets very hot in summer, within 3 months","Oliver Grant, Marlow Logistics Ltd, Operations Manager","o.grant@marlow-logistics.test +44 1632 960000","Yes","That's all, thanks"]}
 ];
 async function playScenario(i){
  if(CH&&CH.autoplay) return; newChat(); CH.autoplay=true; $$('#scen .btn').forEach(b=>b.disabled=true);
@@ -1026,11 +1019,11 @@ function renderLive(){
   ${kvRow('Email',esc(l.contact.email))}${kvRow('Teléfono',esc(l.contact.telefono))}
   ${kvRow('País',l.pais?flag(l.pais)+' '+cname(l.pais)+(l.region?' · '+REGIONS[l.region]:''):'')}${kvRow('Idioma',l.idioma?l.idioma.toUpperCase():'')}
   ${kvRow('Producto',n.productos.map(p=>`${p.qty}× ${esc((cat(p.ref)||{}).es||p.ref)}`).join('<br>'))}
-  ${kvRow('Volumen',n.vol?n.vol.toLocaleString('es-ES')+' L'+(n.formato?' · '+vv('formato',n.formato,'es'):''):'')}
-  ${kvRow('Ubicación',vv('ubic',n.ubic,'es'))}${kvRow('Sustancia',vv('sust',n.sust,'es'))}${kvRow('Plazo',vv('plazo',n.plazo,'es'))}
+  ${kvRow('Espacio',n.vol?n.vol.toLocaleString('es-ES')+' m³'+(n.formato?' · '+vv('formato',n.formato,'es'):''):'')}
+  ${kvRow('Problema',vv('ubic',n.ubic,'es'))}${kvRow('Instalación',vv('sust',n.sust,'es'))}${kvRow('Plazo',vv('plazo',n.plazo,'es'))}
   ${kvRow('RGPD',l.consent===true?'<span class="okc">✔ Consentimiento</span>':l.consent===false?'<span class="badc">✗ Rechazado · contacto borrado</span>':'')}
  </div>
- ${h?`<div class="hint"><b>Normativa (orientativo):</b> ${esc(APQV[h.k][0])} Retención mínima <b>≥ ${h.ret.toLocaleString('es-ES')} L</b>.${h.out?' Cliente fuera de España → validar normativa local.':''}</div>`:''}
+ ${h?`<div class="hint"><b>Cálculo orientativo:</b> ${esc(APQV[h.k][0])} Caudal recomendado <b>≥ ${h.ret.toLocaleString('es-ES')} m³/h</b> (lo valida el equipo técnico).</div>`:''}
  ${ag?`<div class="assign"><span class="av lg" style="--c:${ag.color}">${ini(ag.nombre)}</span><div><b>Asignado a ${esc(ag.nombre)}</b> <span class="mut">· ${esc(ag.rol)}</span><br><small class="mut">Regla ${l.pais}${l.region?'/'+l.region:''} → aviso enviado${l.cc.length?' · CC Dirección Export':''}</small></div></div>`:''}
  ${det.length?`<div style="margin-top:10px"><div class="sec-t">Detalles mencionados por el cliente</div><div class="notes">${det.map(x=>`<div class="note">${esc(x.txt)}</div>`).join('')}</div></div>`:''}
  ${l.offer?`<div class="hint" style="border-color:var(--inf);background:rgba(86,180,255,.06)"><b style="color:var(--inf)">📄 ${l.offer.number}</b> · ${l.offer.status.toUpperCase()} · total ${T.study?'parcial ':''}${fmtE(T.total)}${T.freight===null?' + portes a consultar':''} <button class="btn sm pri" style="margin-left:8px" onclick="openLead('${l.id}')">Revisar y aprobar →</button></div>`:''}
@@ -1102,11 +1095,11 @@ function renderDrawer(){
   </div></div>
  <div class="dr-sec"><h4>Necesidad técnica</h4>
   <div class="fgrid">
-   <label>Volumen (L)<input type="number" data-f="necesidad.vol" value="${n.vol||''}"></label><label>Formato${sel([['','—'],['bidon','Bidones 200 L'],['ibc','IBC 1.000 L'],['garrafas','Garrafas'],['otro','Otro']],n.formato,'data-f="necesidad.formato"')}</label>
-   <label>Ubicación${sel([['','—']].concat(Object.keys(V.ubic).map(k=>[k,V.ubic[k][0]])),n.ubic,'data-f="necesidad.ubic"')}</label><label>Sustancia${sel([['','—']].concat(Object.keys(V.sust).map(k=>[k,V.sust[k][0]])),n.sust,'data-f="necesidad.sust"')}</label>
+   <label>Volumen local (m³)<input type="number" data-f="necesidad.vol" value="${n.vol||''}"></label><label>Tipo de espacio${sel([['','—'],['nave','Nave industrial'],['taller','Taller'],['parking','Parking'],['obrador','Obrador / cocina']],n.formato,'data-f="necesidad.formato"')}</label>
+   <label>Problema principal${sel([['','—']].concat(Object.keys(V.ubic).map(k=>[k,V.ubic[k][0]])),n.ubic,'data-f="necesidad.ubic"')}</label><label>Instalación${sel([['','—']].concat(Object.keys(V.sust).map(k=>[k,V.sust[k][0]])),n.sust,'data-f="necesidad.sust"')}</label>
    <label>Plazo${sel([['','—']].concat(Object.keys(V.plazo).map(k=>[k,V.plazo[k][0]])),n.plazo,'data-f="necesidad.plazo"')}</label>
   </div>
-  ${h?`<div class="hint"><b>Normativa (orientativo):</b> ${esc(APQV[h.k][0])} Retención mínima <b>≥ ${h.ret.toLocaleString('es-ES')} L</b> (mayor recipiente y ≥ 10 % del total).${h.out?' <b>Cliente fuera de España:</b> validar normativa local (p. ej. ICPE en Francia).':''}</div>`:''}
+  ${h?`<div class="hint"><b>Cálculo orientativo:</b> ${esc(APQV[h.k][0])} Caudal recomendado <b>≥ ${h.ret.toLocaleString('es-ES')} m³/h</b> (renovaciones/hora orientativas; lo valida el equipo técnico).</div>`:''}
  </div>
  <div class="dr-sec"><h4>Detalles mencionados por el cliente y notas internas</h4>
   <div class="notes">${l.notas.length?l.notas.map(x=>`<div class="note ${x.by==='cliente'?'':'int'}"><small>${x.by==='cliente'?'CLIENTE':'NOTA INTERNA'} · ${fmtDT(x.t)}</small>${esc(x.txt)}</div>`).join(''):'<div class="empty">Sin detalles todavía</div>'}</div>
@@ -1135,8 +1128,8 @@ function offerEditor(l){
  ${o.lines.map((x,i)=>{const c=cat(x.ref)||{}; const imp=x.qty*x.price*(1-(x.dto||0)/100); return `<tr class="${x.opt&&!x.inc?'opt':''}"><td class="mono" style="font-size:11px">${esc(x.ref)}${x.opt?`<br><label style="font-size:10px;color:var(--am)"><input type="checkbox" data-ol="${i}:inc" ${x.inc?'checked':''} style="width:auto"> opcional</label>`:''}</td><td>${esc(c[lang]||c.es||x.ref)}${c.study?' <span class="tag am">BAJO ESTUDIO</span>':''}<br><small class="mut">${availTxt(x.ref,x.qty)}</small></td><td><input type="number" min="1" data-ol="${i}:qty" value="${x.qty}" style="width:58px"></td><td><input type="number" step="0.01" data-ol="${i}:price" value="${x.price}" style="width:82px"></td><td><input type="number" data-ol="${i}:dto" value="${x.dto||0}" style="width:52px"></td><td class="num">${fmtE(imp)}</td><td><button class="btn sm bad" data-a="delline" data-i="${i}">✕</button></td></tr>`;}).join('')}
  </tbody></table>
  <div class="row">${addLineRow()}</div>
- <div class="tot"><span class="mut">Subtotal</span><span>${fmtE(T.sub)}</span><span class="mut">Transporte</span><span>${T.freight===null?'A consultar'+(T.hasCnt?' (camión-grúa)':''):T.freight===0?'Incluido':fmtE(T.freight)}</span><span class="mut">TOTAL ${l.pais==='ES'&&l.region!=='canarias'?'(sin IVA)':''}</span><span class="big">${fmtE(T.total)}${T.study?' *':''}</span></div>
- ${T.study?'<div class="hint">* Hay partidas «bajo estudio»: el precio se confirma tras validación técnica (dimensionado del contenedor a medida).</div>':''}
+ <div class="tot"><span class="mut">Subtotal</span><span>${fmtE(T.sub)}</span><span class="mut">Transporte</span><span>${T.freight===null?'A consultar'+(T.hasCnt?' (transporte especial)':''):T.freight===0?'Incluido':fmtE(T.freight)}</span><span class="mut">TOTAL ${l.pais==='ES'&&l.region!=='canarias'?'(sin IVA)':''}</span><span class="big">${fmtE(T.total)}${T.study?' *':''}</span></div>
+ ${T.study?'<div class="hint">* Hay partidas «bajo estudio»: el precio se confirma tras validación técnica (dimensionado del sistema a medida).</div>':''}
  <div class="hint" style="border-color:var(--ln2);background:var(--bg)"><b style="color:var(--tx)">Fiscalidad / aduanas:</b> ${esc(taxNote(l,'es'))} <span class="mut">Plazo estimado (gemelo digital): ${leadTime(l)} semanas.</span></div>
  <textarea data-of="notes" rows="2" placeholder="Condiciones particulares / notas para el cliente" style="margin-top:8px">${esc(o.notes)}</textarea>
  <div class="row" style="margin-top:8px">
@@ -1211,7 +1204,7 @@ function printOffer(l){
  const row=x=>{const k=cat(x.ref)||{}; return `<tr><td>${esc(x.ref)}</td><td>${esc(k[lang]||k.es)}</td><td class="r">${x.qty}</td><td class="r">${fmtE(x.price)}</td><td class="r">${x.dto?x.dto+' %':''}</td><td class="r">${fmtE(x.qty*x.price*(1-(x.dto||0)/100))}</td></tr>`;};
  const main=o.lines.filter(x=>!x.opt||x.inc), opt=o.lines.filter(x=>x.opt&&!x.inc);
  $('#printArea').innerHTML=`<div class="pdoc">${o.status==='borrador'?'<div class="wm">BORRADOR</div>':''}
- <div class="ph1"><div><div class="lg">ACME</div><div style="font-size:10px;color:#555">ACME Seguridad Industrial S.L. (empresa ficticia de demostración) · Pol. Ind. El Olivar, Nave 7 · España<br>comercial@acme.test · +34 900 000 000</div></div>
+ <div class="ph1"><div><div class="lg">ACME</div><div style="font-size:10px;color:#555">ACME Ventilación Industrial S.L. (empresa ficticia de demostración) · Pol. Ind. El Olivar, Nave 7 · España<br>comercial@acme.test · +34 900 000 000</div></div>
  <div style="text-align:right"><b style="font-size:16px">${L.quote}</b><br>${o.number}<br>${L.date}: ${fmtDL(now())}</div></div>
  <div style="display:flex;justify-content:space-between;gap:20px"><div><b>${L.client}</b><br>${esc(c.empresa)}<br>${L.attn}: ${esc(c.nombre)}${c.cargo?' ('+esc(c.cargo)+')':''}<br>${esc(c.email)} ${esc(c.telefono)}<br>${flag(l.pais)} ${cname(l.pais)}</div><div style="max-width:50%;font-size:11px">${L.intro}</div></div>
  <table><thead><tr><th>${L.ref}</th><th>${L.desc}</th><th class="r">${L.qty}</th><th class="r">${L.unit}</th><th class="r">${L.dto}</th><th class="r">${L.amount}</th></tr></thead><tbody>${main.map(row).join('')}</tbody></table>
@@ -1229,7 +1222,7 @@ function printOffer(l){
 /* ================================================================
    SEGUIMIENTO · BANDEJA COMERCIAL
 ================================================================ */
-const VAL={cnt:['nuestros contenedores REI 120 se fabrican en España, así que adaptamos medidas, equipamiento y plazos a tu instalación.','nos conteneurs REI 120 sont fabriqués en Espagne : dimensions, équipements et délais adaptés à votre site.','our REI 120 stores are manufactured in Spain, so dimensions, equipment and lead times can be tailored to your site.'],
+const VAL={cnt:['nuestros sistemas de ventilación a medida se fabrican en España, así que adaptamos caudal, equipamiento y plazos a tu instalación.','nos systèmes de ventilation sur mesure sont fabriqués en Espagne : débit, équipements et délais adaptés à votre site.','our custom ventilation systems are manufactured in Spain, so airflow, equipment and lead times can be tailored to your site.'],
  std:['servimos desde nuestro centro logístico central con plazos cortos y podemos agrupar el envío con otros equipos que necesites.','nous livrons depuis notre centre logistique central avec des délais courts, et pouvons grouper l’envoi avec d’autres équipements.','we ship from our central logistics hub with short lead times and can consolidate with any other equipment you need.']};
 const FU={
  es:[c=>`Asunto: Oferta ${c.num} – ${c.emp}\n\nHola ${c.n}:\n\nTe escribo para confirmar que recibiste la oferta ${c.num} que te enviamos el ${c.date} (${c.prod}). ¿Has podido revisarla? Si hay que ajustar cantidades, configuración o plazos, lo adaptamos sin problema.\n\nUn saludo,\n${c.ag}\nACME`,
@@ -1244,7 +1237,7 @@ const FU={
 };
 function fuDraft(l,i,lang){
  const o=l.offer||{}, ag=team(l.owner)||{}, idx=LI[lang]??0, f=l.followups[i]||{n:1};
- const c={n:first(l.contact.nombre)||'',emp:l.contact.empresa||'',num:o.number||'',date:o.sentAt?fmtDL(o.sentAt):'',prod:l.necesidad.productos.map(p=>((cat(p.ref)||{})[lang]||'').split(' · ')[0]).join(', '),ag:ag.nombre||'',valid:o.sentAt?fmtDL(o.sentAt+(o.validDays||30)*DAY):'',val:VAL[l.necesidad.productos.some(p=>p.ref.startsWith('CNT'))?'cnt':'std'][idx]};
+ const c={n:first(l.contact.nombre)||'',emp:l.contact.empresa||'',num:o.number||'',date:o.sentAt?fmtDL(o.sentAt):'',prod:l.necesidad.productos.map(p=>((cat(p.ref)||{})[lang]||'').split(' · ')[0]).join(', '),ag:ag.nombre||'',valid:o.sentAt?fmtDL(o.sentAt+(o.validDays||30)*DAY):'',val:VAL[l.necesidad.productos.some(p=>p.ref.startsWith('VPR'))?'cnt':'std'][idx]};
  const arr=FU[lang]||FU.es; return arr[Math.min(f.n,arr.length)-1](c);
 }
 function openComposer(l,i){
@@ -1257,7 +1250,7 @@ function openComposer(l,i){
  $('#cLang').onchange=e=>{$('#cBody').value=fuDraft(l,i,e.target.value);};
  $('#cAI').onclick=async()=>{ const b=$('#cAI'); b.disabled=true; b.textContent='Redactando…';
   try{ const langName=$('#cAILang').value||({es:'español',fr:'francés',en:'inglés'}[$('#cLang').value]);
-   $('#cBody').value=await aiText('Eres comercial de exportación de ACME (equipos para almacenar mercancías peligrosas; contenedores REI 120 fabricados en España). Redactas emails de seguimiento breves, cordiales y concretos, sin presionar, sin inventar precios ni condiciones distintas de la oferta.',`Redacta el email de seguimiento nº ${l.followups[i].n} de ${l.followups.length} en ${langName}. Primera línea: asunto. Máximo 120 palabras.\nDatos: ${JSON.stringify({cliente:l.contact,pais:cname(l.pais),oferta:l.offer&&{numero:l.offer.number,enviada:l.offer.sentAt&&fmtDL(l.offer.sentAt),total:offerTotals(l).total},productos:l.necesidad.productos.map(p=>p.qty+'x '+(cat(p.ref)||{}).es),detalles_cliente:l.notas.map(n=>n.txt),comercial:(team(l.owner)||{}).nombre})}`); }
+   $('#cBody').value=await aiText('Eres comercial de exportación de ACME (ventilación industrial; los sistemas a medida se fabrican en España). Redactas emails de seguimiento breves, cordiales y concretos, sin presionar, sin inventar precios ni condiciones distintas de la oferta.',`Redacta el email de seguimiento nº ${l.followups[i].n} de ${l.followups.length} en ${langName}. Primera línea: asunto. Máximo 120 palabras.\nDatos: ${JSON.stringify({cliente:l.contact,pais:cname(l.pais),oferta:l.offer&&{numero:l.offer.number,enviada:l.offer.sentAt&&fmtDL(l.offer.sentAt),total:offerTotals(l).total},productos:l.necesidad.productos.map(p=>p.qty+'x '+(cat(p.ref)||{}).es),detalles_cliente:l.notas.map(n=>n.txt),comercial:(team(l.owner)||{}).nombre})}`); }
   catch(err){ toast('IA: '+err.message,'bad'); } b.disabled=false; b.textContent='✨ Redactar con IA (cualquier idioma)'; };
  $('#cCopy').onclick=()=>{ try{navigator.clipboard.writeText($('#cBody').value); toast('Copiado al portapapeles');}catch(e){toast('No se pudo copiar','bad');} };
  const finish=mail=>{ if(mail){ const v=$('#cBody').value.split('\n'); const subj=v[0].replace(/^(asunto|objet|subject)\s*:\s*/i,''); window.open(`mailto:${encodeURIComponent(l.contact.email||'')}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(v.slice(1).join('\n').trim())}`,'_blank'); }
@@ -1300,35 +1293,35 @@ function renderFollow(){
    EMAIL → LEAD
 ================================================================ */
 const SAMPLES=[
-`Objet : Demande de devis – stockage solvants
+`Objet : Demande de devis – ventilation atelier
 
 Bonjour,
 
-Nous sommes une usine de peintures industrielles près de Lyon. Suite au contrôle de la DREAL, nous devons mettre en conformité le stockage de nos solvants : environ 6 GRV de 1 000 L, actuellement à l'extérieur contre le bâtiment de production. Pourriez-vous nous proposer un conteneur coupe-feu REI 120 adapté, avec bac de rétention ? Nous aimerions une installation avant fin janvier.
+Nous sommes un atelier de métallerie près de Liège. Notre hall de production fait environ 6 000 m³ et les fumées de soudure deviennent un problème. Pourriez-vous nous proposer un système de ventilation adapté ? Nous aimerions une installation avant fin janvier.
 
 Merci d'avance,
 
 Claire Fontaine
-Responsable QHSE
-Alpes Peinture SAS
-Tél. +33 4 00 00 00 00
-c.fontaine@alpes-peinture.test`,
-`Subject: RFQ safety cabinets and spill pallets
+Responsable maintenance
+Métal & Flux SPRL
+Tél. +32 4 000 00 00
+c.fontaine@metal-flux.test`,
+`Subject: RFQ axial fans and air curtains
 
 Hello,
 
-We are a chemical distributor in Poznań. We need a quotation for 5 safety cabinets for flammable liquids (type 90) and 10 steel spill pallets for 4 drums. Delivery to our warehouse in Poznań, within the next 6 weeks if possible. Do you already have a distributor in Poland?
+We are an HVAC distributor in Poznań. We need a quotation for 12 wall axial fans Ø630 and 8 industrial air curtains 1.5 m. Delivery to our warehouse in Poznań, within the next 6 weeks if possible. Do you already have a distributor in Poland?
 
 Best regards,
 Tomasz Kowal
 Procurement Manager
-ChemPartner Sp. z o.o.
+HVAC Partner Sp. z o.o.
 +48 61 000 00 00
-t.kowal@chempartner.test`,
-`Oggetto: richiesta preventivo assorbenti
+t.kowal@hvacpartner.test`,
+`Oggetto: richiesta preventivo ventilazione
 
 Buongiorno,
-siamo un'officina meccanica vicino a Brescia. Ci servono 20 confezioni di assorbenti per idrocarburi e 3 kit antisversamento da 240 litri. Non c'è urgenza.
+siamo un'officina meccanica vicino a Brescia. Ci servono 2 casse di ventilazione centrifughe da 4.200 m³/h e 4 confezioni di filtri di ricambio. Non c'è urgenza.
 
 Cordiali saluti,
 Giulia Bernardi
@@ -1339,14 +1332,14 @@ let EXTRACT=null;
 function extractProductsOffline(t){
  const out=[], add=(ref,q)=>{ if(!ref) return; const e=out.find(x=>x.ref===ref); if(e) e.qty+=q; else out.push({ref,qty:q}); };
  const win=i=>t.slice(i,i+90); let m;
- const reCab=/(\d+)\s*(?:[a-z0-9-]+\s){0,2}(armarios?|armoires?|cabinets?|armadi|szaf\w*)/g;
- while((m=reCab.exec(t))){ const w=win(m.index); add(/(acid|base|corros)/.test(w)?'ARM-AB-ECO':/(litio|lithium|batter)/.test(w)?'ARM-LI':'ARM-INF90-1200',+m[1]); }
- const reCub=/(\d+)\s*(?:[a-z0-9-]+\s){0,2}(cubetos?|bacs?|spill pallets?|vasche|wann\w*|sumps?)/g;
- while((m=reCub.exec(t))){ const w=win(m.index); add(/(ibc|grv|1[.\s]?000)/.test(w)?'CUB-IBC':/\b4\s*(bidon|drum|fut|fusti)/.test(w)?'CUB-AC-4B':'CUB-AC-2B',+m[1]); }
- const reAbs=/(\d+)\s*(?:[a-z0-9-]+\s){0,1}(cajas?|boxes|cartons?|confezioni|paquetes|packs?)\s*(?:[a-z0-9']+\s){0,2}(absorb\w*|assorb\w*|sorb\w*|hojas|pads)/g;
- while((m=reAbs.exec(t))){ const w=win(m.index); add(/(hidrocarb|hydrocarb|idrocarb|oil|aceite|huile|olio)/.test(w)?'ABS-HC-100':'ABS-UNI-100',+m[1]); }
- const reKit=/(\d+)\s*kits?\b/g;
- while((m=reKit.exec(t))){ const w=win(m.index); add(/240/.test(w)?'KIT-240':'KIT-50',+m[1]); }
+ const reAxi=/(\d+)\s*(?:[a-z0-9-]+\s){0,2}(axiales?|axial|ventiladores?|ventilateurs?|fans?|ventilatori)/g;
+ while((m=reAxi.exec(t))){ const w=win(m.index); add(/630/.test(w)?'VAX-630':'VAX-450',+m[1]); }
+ const reCen=/(\d+)\s*(?:[a-z0-9-]+\s){0,2}(centrifug\w*|caissons?|cajas? centrifugas?|casse?|extractores? de tejado|extracteurs?)/g;
+ while((m=reCen.exec(t))){ const w=win(m.index); add(/(tejado|toiture|roof)/.test(w)?'VTE-500':/(9[.\s]?000)/.test(w)?'VCE-9000':'VCE-4200',+m[1]); }
+ const reCor=/(\d+)\s*(?:[a-z0-9-]+\s){0,2}(cortinas?|rideaux?|curtains?)/g;
+ while((m=reCor.exec(t))){ const w=win(m.index); add(/2[.,]?0? ?m\b/.test(w)?'VCA-200':'VCA-150',+m[1]); }
+ const reFil=/(\d+)\s*(?:[a-z0-9-]+\s){0,2}(cajas?|boxes|cartons?|confezioni|paquetes|packs?)\s*(?:[a-z0-9']+\s){0,2}(filtros?|filtres?|filters?)/g;
+ while((m=reFil.exec(t))){ add('VFI-G4',+m[1]); }
  return out;
 }
 function signature(raw){
@@ -1362,20 +1355,20 @@ function signature(raw){
 }
 function extractOffline(raw){
  const t=norm(raw), u=parseText(raw,'email'), sig=signature(raw);
- const d={nombre:sig.nombre,empresa:sig.empresa,cargo:sig.cargo,email:u.email||'',telefono:'',pais:u.pais||'',idioma:detectLang(raw)||'',volumen_litros:u.cat==='cnt'?(u.vol||null):null,formato:u.formato==='bidon'?'bidones':u.formato||'',sustancia:u.sust||'',ubicacion:['interior','ext_cerca','ext_lejos'].includes(u.ubic)?u.ubic:'',plazo:u.plazo||'',productos:[],detalles:[]};
+ const d={nombre:sig.nombre,empresa:sig.empresa,cargo:sig.cargo,email:u.email||'',telefono:'',pais:u.pais||'',idioma:detectLang(raw)||'',volumen_m3:u.cat==='prj'?(u.vol||null):null,formato:u.formato||'',instalacion:u.sust||'',problema:['calor','humo','humedad','olores'].includes(u.ubic)?u.ubic:'',plazo:u.plazo||'',productos:[],detalles:[]};
  const tm=raw.replace(d.email,'').match(/(\+?\d[\d\s().-]{7,}\d)/); if(tm) d.telefono=tm[1].trim();
  if(!d.pais&&d.email) d.pais=paisFromEmail(d.email)||'';
  if(!d.empresa&&d.email){ const dom=d.email.split('@')[1].split('.')[0]; d.empresa=dom.split(/[-_]/).map(w=>w[0].toUpperCase()+w.slice(1)).join(' '); }
  if(d.pais==='ES'){ const rg=regionFromText(t); if(rg) d.region_es=rg; }
- if(u.cat==='cnt'){ const v=u.vol||0; d.productos.push({ref:v<=2000?'CNT-REI120-2':v<=4000?'CNT-REI120-4':'CNT-REI120-XL',cantidad:1}); }
+ if(u.cat==='prj'){ const v=(u.vol||0)*(ACH[u.formato]||5); d.productos.push({ref:v<=20000?'VPR-20K':v<=40000?'VPR-40K':'VPR-XL',cantidad:1}); }
  extractProductsOffline(t).forEach(p=>d.productos.push({ref:p.ref,cantidad:p.qty}));
  const sm=raw.match(/^(objet|subject|asunto|oggetto|temat|betreff)\s*:\s*(.+)$/im); if(sm) d.detalles.push('Asunto: '+sm[2].trim());
- raw.split(/(?<=[.?!])\s+/).forEach(s=>{ const n=norm(s); if(/(dreal|icpe|normativ|conform|distribut|delivery to|livraison|entrega en|consegna|grua|grue|crane|acces|access|budget|presupuesto|competen|deadline|avant fin|within)/.test(n)&&s.length<260) d.detalles.push(s.trim()); });
+ raw.split(/(?<=[.?!])\s+/).forEach(s=>{ const n=norm(s); if(/(normativ|conform|distribut|delivery to|livraison|entrega en|consegna|altura|height|hauteur|acces|access|budget|presupuesto|competen|deadline|avant fin|within|ruido|noise|bruit)/.test(n)&&s.length<260) d.detalles.push(s.trim()); });
  d.resumen=`Email entrante · ${d.productos.length} producto(s) detectado(s)`;
  return d;
 }
 async function extractAI(raw){
- const r=await callClaude({system:'Extraes datos de emails comerciales entrantes para el CRM de ACME (equipos para almacenar mercancías peligrosas). Usa solo información presente en el email; no inventes. Mapea los productos a las referencias del catálogo:\n'+DB.catalog.map(c=>`- ${c.ref}: ${c.es}`).join('\n')+'\nContenedores: ≤2.000 L → CNT-REI120-2; ≤4.000 L → CNT-REI120-4; más → CNT-REI120-XL.',
+ const r=await callClaude({system:'Extraes datos de emails comerciales entrantes para el CRM de ACME (ventilación industrial). Usa solo información presente en el email; no inventes. Mapea los productos a las referencias del catálogo:\n'+DB.catalog.map(c=>`- ${c.ref}: ${c.es}`).join('\n')+'\nSistemas a medida: ≤20.000 m³/h → VPR-20K; ≤40.000 m³/h → VPR-40K; más → VPR-XL.',
   tools:[{name:'crear_lead',description:'Crea el lead en el CRM con los datos extraídos del email',input_schema:{type:'object',properties:Object.assign(leadProps(),{resumen:{type:'string',description:'Resumen en español para el comercial (2-3 viñetas)'}})}}],
   tool_choice:{type:'tool',name:'crear_lead'},messages:[{role:'user',content:'Email:\n\n'+raw}],max_tokens:1200});
  const u=r.content.find(b=>b.type==='tool_use'); if(!u) throw new Error('sin resultado'); return u.input;
@@ -1392,7 +1385,7 @@ function renderExtract(){
  $('#extractOut').innerHTML=`<div class="row" style="margin-bottom:8px"><span class="tag ${mode==='ia'?'ok':'am'}">${mode==='ia'?'EXTRAÍDO CON IA':'EXTRACTOR LOCAL (sin IA)'}</span>${d.idioma?`<span class="tag">idioma ${esc(String(d.idioma).toUpperCase())}</span>`:''}${d.pais?`<span class="tag">${flag(d.pais)} ${cname(d.pais)}</span>`:''}</div>
  <div class="kv">${kvRow('Empresa',esc(d.empresa))}${kvRow('Contacto',esc(d.nombre))}${kvRow('Cargo',esc(d.cargo))}${kvRow('Email',esc(d.email))}${kvRow('Teléfono',esc(d.telefono))}
  ${kvRow('Productos',p.map(x=>`${x.cantidad||1}× <span class="mono">${esc(x.ref)}</span> ${esc((cat(x.ref)||{}).es||'')}`).join('<br>'))}
- ${kvRow('Volumen',d.volumen_litros?Number(d.volumen_litros).toLocaleString('es-ES')+' L':'')}${kvRow('Ubicación',vv('ubic',d.ubicacion,'es'))}${kvRow('Sustancia',vv('sust',d.sustancia,'es'))}${kvRow('Plazo',vv('plazo',d.plazo,'es'))}</div>
+ ${kvRow('Espacio',d.volumen_m3?Number(d.volumen_m3).toLocaleString('es-ES')+' m³':'')}${kvRow('Problema',vv('ubic',d.problema,'es'))}${kvRow('Instalación',vv('sust',d.instalacion,'es'))}${kvRow('Plazo',vv('plazo',d.plazo,'es'))}</div>
  ${(d.detalles||[]).length?`<div style="margin-top:10px"><div class="sec-t">Detalles detectados</div><div class="notes">${d.detalles.map(x=>`<div class="note">${esc(x)}</div>`).join('')}</div></div>`:''}
  ${d.resumen?`<pre class="sum" style="margin-top:10px">${esc(d.resumen)}</pre>`:''}
  <div class="row" style="margin-top:12px"><button class="btn pri" id="btnCreateFromEmail">🗂 Crear lead + borrador de oferta</button><span class="mut" style="font-size:11.5px">Revisable y editable en la ficha</span></div>`;
@@ -1469,13 +1462,13 @@ function renderConfig(){
   <div class="card"><h3>⏰ Reglas comerciales</h3>
    <div class="fgrid"><label>Cadencia de seguimiento (días tras envío)<input id="cfCad" value="${s.cadence.join(', ')}"></label>
    <label>Descuentos por volumen (uds:% , …)<input id="cfDto" value="${s.discounts.map(d=>d.min+':'+d.pct).join(', ')}"></label>
-   <label style="flex-direction:row;align-items:center;gap:6px;text-transform:none;font:12px var(--sans);color:var(--tx)"><input type="checkbox" id="cfCC" ${s.ccExport?'checked':''} style="width:auto"> CC a Dirección Export en leads de contenedor fuera de España</label></div>
-   <div class="mut" style="font-size:11.5px;margin-top:6px">Los contenedores REI 120 nunca llevan descuento automático ni portes automáticos (requieren estudio técnico).</div></div>
+   <label style="flex-direction:row;align-items:center;gap:6px;text-transform:none;font:12px var(--sans);color:var(--tx)"><input type="checkbox" id="cfCC" ${s.ccExport?'checked':''} style="width:auto"> CC a Dirección Export en leads de proyecto a medida fuera de España</label></div>
+   <div class="mut" style="font-size:11.5px;margin-top:6px">Los sistemas a medida nunca llevan descuento automático ni portes automáticos (requieren estudio técnico).</div></div>
   <div class="card"><h3>💾 Datos</h3><div class="row">
    <button class="btn sm" id="cfExp">⇩ Exportar JSON</button><label class="btn sm">⇧ Importar JSON<input type="file" id="cfImp" accept=".json" hidden></label>
    <button class="btn sm" id="cfCsvCat">⇩ Tarifa CSV</button><label class="btn sm">⇧ Importar tarifa CSV<input type="file" id="cfImpCat" accept=".csv,.txt" hidden></label>
    <button class="btn sm bad" id="cfReset">↺ Restaurar datos de demo</button></div>
-   <div class="mut" style="font-size:11.5px;margin-top:6px">Formato CSV de tarifa: ref;categoria(cnt|arm|cub|abs);descripcion_es;descripcion_fr;descripcion_en;precio;semanas</div></div>
+   <div class="mut" style="font-size:11.5px;margin-top:6px">Formato CSV de tarifa: ref;categoria(prj|axi|cen|acc);descripcion_es;descripcion_fr;descripcion_en;precio;semanas</div></div>
  </div>
  <div class="fl">
   <div class="card"><h3>👥 Equipo comercial</h3><table class="ct"><thead><tr><th></th><th>Nombre</th><th>Rol</th><th>Idiomas</th><th>Email aviso</th></tr></thead><tbody>
@@ -1521,15 +1514,15 @@ function exportCSV(){
 function seed(){
  DB={seq:1000,offerSeq:1,leads:[],catalog:seedCatalog(),team:seedTeam(),rules:seedRules(),settings:defaultSettings(),log:[],twin:seedTwin(),memory:{clients:{},global:[]},mcp:seedMcp()};
  const S=[
-  {emp:'Coloris Industrie SAS',nom:'Pierre Marchand',car:'Responsable HSE',em:'p.marchand@coloris-industrie.test',tel:'+33 4 00 00 00 01',pais:'FR',id:'fr',ago:9,src:'chat',prod:[['CNT-REI120-4',1]],vol:3800,fmt:'ibc',ubic:'ext_cerca',sust:'inflamables',plazo:'urgente',st:'enviada',offer:'enviada',sent:4,done:0,notes:['Acceso camión-grúa por la parte trasera de la planta','Deben cumplir ICPE antes de la visita de la DREAL']},
-  {emp:'Delta Polimer Sp. z o.o.',nom:'Katarzyna Lis',car:'Purchasing Manager',em:'k.lis@deltapolimer.test',tel:'+48 71 000 00 02',pais:'PL',id:'en',ago:20,src:'email',prod:[['CUB-IBC',6],['ARM-INF90-1200',2]],plazo:'1-3m',st:'negociacion',offer:'enviada',sent:12,done:2,notes:['Piden precio de distribuidor para Polonia','Entrega en almacén de Wrocław']},
-  {emp:'Laboratori Serio Srl',nom:'Marco Bellini',car:'Responsabile sicurezza',em:'m.bellini@labserio.test',pais:'IT',id:'it',ago:1,src:'chat',prod:[['ARM-AB-ECO',4]],sust:'corrosivos',plazo:'1-3m',st:'oferta',offer:'borrador',notes:['Laboratorio con espacio limitado: armarios de máximo 60 cm de fondo']},
-  {emp:'Marlow Coatings Ltd',nom:'Oliver Grant',car:'Operations Manager',em:'o.grant@marlow-coatings.test',tel:'+44 1632 960001',pais:'GB',id:'en',ago:2,src:'chat',prod:[['CNT-REI120-2',2]],vol:2000,fmt:'ibc',ubic:'ext_lejos',sust:'inflamables',plazo:'1-3m',st:'cualificado',prio:true,notes:['Prefiere que le llamen por teléfono','Dos plantas: Leeds y Manchester']},
-  {emp:'Tintas do Minho Lda',nom:'Rui Fonseca',car:'Diretor de compras',em:'rui.fonseca@tintasdominho.test',tel:'+351 22 000 0003',pais:'PT',id:'pt',ago:14,src:'email',prod:[['KIT-240',10],['ABS-HC-100',20]],plazo:'1-3m',st:'enviada',offer:'enviada',sent:7,done:1,notes:['Reposición trimestral posible si el precio encaja']},
-  {emp:'Agro Atlas SARL',nom:'Karim Benali',car:'Gérant',em:'k.benali@agroatlas.test',pais:'MA',id:'fr',ago:0.2,src:'chat',prod:[['CUB-AC-4B',12]],sust:'toxicos',plazo:'info',st:'nuevo',notes:['Almacenan fitosanitarios en Agadir']},
-  {emp:'Pinturas Vega S.L.',nom:'Lucía Herrera',car:'Jefa de planta',em:'lherrera@pinturasvega.test',tel:'+34 955 000 004',pais:'ES',reg:'sur',id:'es',ago:40,src:'chat',prod:[['CNT-REI120-4',1]],vol:4000,fmt:'ibc',ubic:'interior',sust:'inflamables',plazo:'urgente',st:'ganado',offer:'enviada',sent:30,done:1,notes:['Inspección de industria programada']},
-  {emp:'Metalúrgica Norte S.A.',nom:'Jordi Vidal',car:'Responsable de compras',em:'jvidal@metalurgicanorte.test',pais:'ES',reg:'noreste',id:'es',ago:35,src:'email',prod:[['ARM-INF90-600',3]],plazo:'1-3m',st:'perdido',offer:'enviada',sent:28,done:3,lost:'Precio: eligió un competidor online',notes:['Comparaba con tienda online']},
-  {emp:'Nord Chemie Logistik GmbH',nom:'Anna Berger',car:'Leiterin Arbeitssicherheit',em:'a.berger@nordchemie-logistik.test',tel:'+49 621 000 0005',pais:'DE',id:'en',ago:18,src:'email',prod:[['ARM-LI',4],['KIT-240',2]],sust:'litio',plazo:'1-3m',st:'enviada',offer:'enviada',sent:14,done:2,notes:['Almacén de carretillas con baterías de litio','Necesitan documentación en inglés']}
+  {emp:'Atelier Dubois SPRL',nom:'Pierre Marchand',car:'Responsable maintenance',em:'p.marchand@atelier-dubois.test',tel:'+32 4 000 00 01',pais:'BE',id:'fr',ago:9,src:'chat',prod:[['VPR-20K',1]],vol:6000,fmt:'taller',ubic:'humo',sust:'nueva',plazo:'urgente',st:'enviada',offer:'enviada',sent:4,done:0,notes:['Altura del taller 7 m','Alimentación trifásica disponible']},
+  {emp:'HVAC Partner Sp. z o.o.',nom:'Katarzyna Lis',car:'Purchasing Manager',em:'k.lis@hvacpartner.test',tel:'+48 71 000 00 02',pais:'PL',id:'en',ago:20,src:'email',prod:[['VAX-630',12],['VCA-150',8]],plazo:'1-3m',st:'negociacion',offer:'enviada',sent:12,done:2,notes:['Piden precio de distribuidor para Polonia','Entrega en almacén de Wrocław']},
+  {emp:'Officine Bernardi Srl',nom:'Marco Bellini',car:'Responsabile di produzione',em:'m.bellini@officinebernardi.test',pais:'IT',id:'it',ago:1,src:'chat',prod:[['VCE-4200',2]],ubic:'calor',plazo:'1-3m',st:'oferta',offer:'borrador',notes:['Taller mecánico con espacio limitado: cajas acústicas por el nivel de ruido']},
+  {emp:'Marlow Logistics Ltd',nom:'Oliver Grant',car:'Operations Manager',em:'o.grant@marlow-logistics.test',tel:'+44 1632 960001',pais:'GB',id:'en',ago:2,src:'chat',prod:[['VPR-40K',2]],vol:12000,fmt:'nave',ubic:'calor',sust:'nueva',plazo:'1-3m',st:'cualificado',prio:true,notes:['Prefiere que le llamen por teléfono','Dos centros logísticos: Leeds y Manchester']},
+  {emp:'Armazéns do Minho Lda',nom:'Rui Fonseca',car:'Diretor de compras',em:'rui.fonseca@armazensminho.test',tel:'+351 22 000 0003',pais:'PT',id:'pt',ago:14,src:'email',prod:[['VCA-200',6],['VFI-G4',20]],plazo:'1-3m',st:'enviada',offer:'enviada',sent:7,done:1,notes:['Reposición trimestral posible si el precio encaja']},
+  {emp:'Atlas Agroalimentaire SARL',nom:'Karim Benali',car:'Gérant',em:'k.benali@atlas-agro.test',pais:'MA',id:'fr',ago:0.2,src:'chat',prod:[['VAX-450',12]],ubic:'olores',plazo:'info',st:'nuevo',notes:['Planta de envasado: quieren renovar el aire de la zona de expedición']},
+  {emp:'Logística Vega S.L.',nom:'Lucía Herrera',car:'Jefa de planta',em:'lherrera@logisticavega.test',tel:'+34 955 000 004',pais:'ES',reg:'sur',id:'es',ago:40,src:'chat',prod:[['VPR-40K',1]],vol:8000,fmt:'nave',ubic:'calor',sust:'nueva',plazo:'urgente',st:'ganado',offer:'enviada',sent:30,done:1,notes:['Quieren la instalación antes del verano']},
+  {emp:'Talleres del Norte S.A.',nom:'Jordi Vidal',car:'Responsable de compras',em:'jvidal@talleresdelnorte.test',pais:'ES',reg:'noreste',id:'es',ago:35,src:'email',prod:[['VAX-630',4]],plazo:'1-3m',st:'perdido',offer:'enviada',sent:28,done:3,lost:'Precio: eligió un competidor online',notes:['Comparaba con tienda online']},
+  {emp:'Nord Werk GmbH',nom:'Anna Berger',car:'Leiterin Produktion',em:'a.berger@nordwerk.test',tel:'+49 621 000 0005',pais:'DE',id:'en',ago:18,src:'email',prod:[['VCE-9000',3],['VFI-G4',12]],ubic:'humo',plazo:'1-3m',st:'enviada',offer:'enviada',sent:14,done:2,notes:['Taller de soldadura','Necesitan documentación en inglés']}
  ];
  for(const o of S){
   const l=blankLead(o.src); const t0=now()-o.ago*DAY; l.created=t0; l.updated=t0;
@@ -1553,73 +1546,71 @@ function seed(){
    GEMELO DIGITAL · conocimiento + estado operativo + simulación
 ================================================================ */
 function seedDocs(){ const D=(id,title,type,text)=>({id,title,type,text,updated:now()}); return [
-D('d1','Contenedor modular REI 120 — ficha resumida','producto',`[Contenido de ejemplo para la demo — sustituir por la ficha técnica real]
+D('d1','Sistemas de ventilación a medida — ficha resumida','producto',`[Contenido de ejemplo para la demo — sustituir por la ficha técnica real]
 
-ACME fabrica en España contenedores modulares con resistencia al fuego REI 120 para almacenar productos inflamables y otras sustancias peligrosas en recipientes móviles (bidones, IBC, garrafas). La resistencia se acredita mediante ensayo del conjunto completo según UNE-EN 1363-1 / UNE-EN 13501-2, no por componentes sueltos.
+ACME diseña y fabrica en España sistemas de ventilación a medida para naves industriales, talleres y parkings: captación, cajas de impulsión o extracción, red de conductos y rejillas, y cuadro eléctrico con protección de motores.
 
-Versiones estándar: 2 IBC u 8 bidones (hasta 2.000 L) y 4 IBC o 16 bidones (hasta 4.000 L). Por encima de 4 IBC el contenedor se dimensiona a medida y la oferta queda bajo estudio técnico.
+Versiones estándar: hasta 20.000 m³/h y hasta 40.000 m³/h de caudal total. Por encima de 40.000 m³/h el sistema se dimensiona a medida y la oferta queda bajo estudio técnico.
 
-Equipamiento habitual: cubeto de retención integrado, puertas con cierre automático, juntas intumescentes, puesta a tierra antiestática, estanterías de carga e iluminación. Opcionales bajo estudio: ventilación forzada ATEX, detección y extinción automática, control de temperatura.
+Equipamiento habitual: ventiladores de alta eficiencia, filtros G4, compuertas motorizadas y sondas de temperatura. Opcionales bajo estudio: variadores de frecuencia, control por CO2 o CO (parkings) y recuperador de calor.
 
-Instalación: el contenedor se entrega montado en camión con grúa. El cliente debe prever una solera nivelada y acceso para el camión-grúa. Portes y descarga se cotizan aparte según destino.
+Instalación: el sistema se entrega por módulos y el montaje lo realiza un instalador autorizado. El cliente debe prever la alimentación eléctrica y los apoyos o anclajes. Portes se cotizan según destino.
 
 Plazo de fabricación: depende de la cartera de pedidos de la planta; el gemelo digital calcula el plazo orientativo en cada oferta.`),
-D('d2','Normativa de almacenamiento (orientativa)','normativa',`[Orientativo — siempre lo valida el equipo técnico]
+D('d2','Guía rápida de cálculo de caudal (orientativa)','normativa',`[Orientativo — siempre lo valida el equipo técnico]
 
-España — RD 656/2017 (Reglamento APQ): el cubeto de retención debe poder contener el volumen del recipiente mayor y, como mínimo, el 10 % del volumen total almacenado. En algunas zonas puede exigirse más.
+El caudal necesario se estima multiplicando el volumen del local (m³) por las renovaciones de aire por hora (ACH) recomendadas para la actividad.
 
-España — MIE APQ-10 (recipientes móviles): para más de 500 L de líquidos inflamables dentro de edificios o a menos de 5 m de sus paredes exteriores suele exigirse un almacén con resistencia al fuego REI 120 ensayado como conjunto.
+Nave industrial: 4–6 ACH según cargas térmicas y actividad.
 
-Francia — las instalaciones con sustancias peligrosas se rigen por la normativa ICPE y las inspecciona la DREAL. Conviene preguntar al cliente su régimen ICPE (declaración, registro o autorización).
+Taller: 6–10 ACH; con humos de soldadura, la parte alta de la horquilla y captación localizada.
 
-Reino Unido — DSEAR (Dangerous Substances and Explosive Atmospheres Regulations 2002) para sustancias inflamables.
+Parking: ~6 ACH como orientación; el dimensionado definitivo depende de la normativa local de CO y desenfumado.
 
-Alemania — la TRGS 510 regula el almacenamiento de sustancias peligrosas en recipientes móviles.
+Obrador / cocina: 8–12 ACH según cargas térmicas y vapores.
 
-Resto de países: aplicar la normativa local y los requisitos de la aseguradora del cliente.`),
-D('d3','Armarios de seguridad','producto',`Armarios para inflamables tipo 90 según EN 14470-1: resistencia al fuego de 90 minutos, cierre automático de puertas y posibilidad de conexión a extracción. Anchos de 600 mm y 1.200 mm.
+Ejemplo: nave de 6.000 m³ con actividad ligera → 6.000 × 5 = 30.000 m³/h.`),
+D('d3','Ventiladores axiales y centrífugos','producto',`Ventiladores axiales murales Ø450 (5.100 m³/h) y Ø630 (11.000 m³/h): renovación general de aire en naves y talleres, instalación mural sencilla.
 
-Armarios para ácidos y bases: construcción resistente a la corrosión y bandejas de retención extraíbles, para corrosivos no inflamables.
+Cajas de ventilación centrífugas acústicas de 4.200 y 9.000 m³/h: cuando importa el nivel sonoro o hay que vencer la presión de una red de conductos.
 
-Armarios para baterías de litio: carga y almacenamiento seguros de baterías de equipos de trabajo (carretillas, herramientas), con resistencia al fuego y opciones de detección.
+Extractores de tejado Ø500 (6.500 m³/h): extracción de aire caliente acumulado en la parte alta de la nave.
 
-Regla práctica: el armario tipo 90 es la solución cuando el volumen de inflamables en el puesto de trabajo es pequeño; para volúmenes mayores o almacenamiento exterior, contenedor REI 120.`),
-D('d4','Cubetos de retención y absorbentes','producto',`Cubetos de retención en acero para 2 o 4 bidones y cubetos para IBC de 1.000 L. Para ácidos y químicos agresivos se recomienda PEHD (polietileno de alta densidad).
+Regla práctica: para renovación simple sin conductos, axiales; con conductos o exigencia de ruido, centrífugos; para estratificación de calor, extractores de tejado combinados con entradas de aire bajas.`),
+D('d4','Cortinas de aire, conductos y filtros','producto',`Cortinas de aire industriales de 1,5 m y 2,0 m: mantienen la temperatura interior con la puerta abierta (muelles de carga, zonas de expedición) y reducen la entrada de polvo e insectos.
 
-Dimensionado: el cubeto debe retener el recipiente mayor y al menos el 10 % del total. Ejemplo: 4 bidones de 200 L → retención mínima de 200 L.
+Kits de conducto y rejillas (tramo de 6 m): para distribuir el caudal de cajas centrífugas o completar sistemas a medida.
 
-Absorbentes universales: absorben agua, aceites y la mayoría de químicos; para talleres y uso general. Absorbentes de hidrocarburos: repelen el agua, adecuados para exteriores y derrames de aceite o combustible.
-
-Kits antiderrames de 50 L (vehículos y puntos de trabajo) y de 240 L (contenedor con ruedas para zonas de almacenamiento). Venta cruzada recomendada con contenedores y armarios de inflamables.`),
+Filtros G4 de repuesto en cajas de 4 unidades: mantenimiento de cajas de ventilación; recomendable ofrecerlos junto a cada centrífuga (venta cruzada).`),
 D('d5','Condiciones comerciales (demo)','comercial',`[Condiciones de ejemplo para la demo]
 
-Validez de las ofertas: 30 días. Precios sin IVA. Forma de pago a convenir (transferencia; anticipo en contenedores a medida).
+Validez de las ofertas: 30 días. Precios sin IVA. Forma de pago a convenir (transferencia; anticipo en sistemas a medida).
 
-Portes: incluidos en España peninsular a partir de 500 €; resto de destinos según tabla. Contenedores REI 120: portes y descarga con grúa siempre a consultar.
+Portes: incluidos en España peninsular a partir de 500 €; resto de destinos según tabla. Sistemas a medida: portes siempre a consultar.
 
-Descuentos por volumen en producto estándar: desde 10 unidades 5 %, desde 20 unidades 10 %. Los contenedores no llevan descuento automático.
+Descuentos por volumen en producto estándar: desde 10 unidades 5 %, desde 20 unidades 10 %. Los sistemas a medida no llevan descuento automático.
 
 Toda oferta generada por el agente la revisa y aprueba un comercial antes de enviarse. En exportación, la oferta incluye la nota fiscal y aduanera del destino (entrega intracomunitaria, exportación, Canarias).`),
-D('d6','Argumentario por mercado','mercado',`Francia: cercanía y plazos, documentación en francés y conocimiento de la normativa ICPE. Las inspecciones de la DREAL suelen acelerar la decisión.
+D('d6','Argumentario por mercado','mercado',`Portugal: cercanía y plazos cortos desde la oficina de Portugal; documentación en portugués disponible.
 
 Polonia e Italia: muchos contactos son distribuidores; preparar escala de precios de distribuidor y documentación en inglés o en el idioma local.
 
-Reino Unido: exportación post-Brexit (DUA de exportación y EORI del destinatario). Mencionar DSEAR. Incoterm habitual: DAP.
+Reino Unido: exportación post-Brexit (DUA de exportación y EORI del destinatario). Incoterm habitual: DAP.
 
-Alemania: clientes muy técnicos; mencionar TRGS 510 y el ensayo del conjunto. Documentación en inglés o alemán.
+Alemania: clientes muy técnicos; preparar curvas de ventiladores, niveles sonoros y eficiencia energética. Documentación en inglés o alemán.
 
-África francófona (Costa de Marfil, Marruecos): proyectos industriales y agrícolas; exportación con prueba de origen (EUR.1 cuando aplique). Atención desde la oficina de Marruecos y Dirección Export.`),
-D('d7','Objeciones frecuentes y respuestas','faq',`«Es caro»: comparar con el coste de no cumplir (sanción, paralización, rechazo de la aseguradora) y con el valor del ensayo del conjunto; ofrecer versión estándar frente a medida.
+Bélgica y Países Bajos: valoran el ahorro energético y el control por variador de frecuencia; documentación en francés o inglés.`),
+D('d7','Objeciones frecuentes y respuestas','faq',`«Es caro»: comparar con el coste del absentismo por calor, la parada de producción en verano y el consumo de soluciones improvisadas; ofrecer la versión estándar frente al sistema a medida.
 
-«Lo encuentro más barato online»: un catálogo online no asesora sobre normativa ni garantiza el ensayo del conjunto; nosotros dimensionamos, documentamos e instalamos.
+«Lo encuentro más barato online»: una tienda online vende cajas, no el caudal calculado ni la puesta en marcha; nosotros dimensionamos, documentamos y damos soporte.
 
 «El plazo es largo»: enseñar el plazo calculado por el gemelo digital y ofrecer reserva de hueco de fabricación con el pedido.
 
-«Necesito el visto bueno de la aseguradora o del inspector»: enviar ficha técnica y certificado de ensayo; ofrecer una llamada con el técnico.
+«Necesito el visto bueno de mantenimiento o de dirección»: enviar ficha técnica y curvas; ofrecer una llamada con el técnico.
 
 «Lo vemos el año que viene»: dejar la oferta vigente, programar seguimiento a 3 meses y registrar el motivo en la memoria.`)
 ];}
-function seedTwin(){ return {capacity:{cntPerMonth:3,baseWeeks:4},stock:{'ARM-INF90-1200':6,'ARM-INF90-600':4,'ARM-AB-ECO':8,'ARM-LI':1,'CUB-AC-2B':25,'CUB-AC-4B':18,'CUB-PE-2B':12,'CUB-IBC':5,'ABS-UNI-100':60,'ABS-HC-100':40,'KIT-50':20,'KIT-240':6},docs:seedDocs()}; }
+function seedTwin(){ return {capacity:{cntPerMonth:3,baseWeeks:4},stock:{'VAX-450':25,'VAX-630':18,'VCE-4200':6,'VCE-9000':3,'VTE-500':8,'VCA-150':12,'VCA-200':9,'VAC-DUCT':40,'VFI-G4':60},docs:seedDocs()}; }
 const STOP=new Set('de la el los las un una unos unas y o en a para por con del al que se su sus es son lo como mas muy the and of to in for on with is are le les des du et un une pour par avec est qui dans sur ce cette pas tiene puede hay este esta'.split(' '));
 const toks=s=>norm(s).replace(/[^a-z0-9 ]/g,' ').split(/\s+/).filter(w=>w.length>2&&!STOP.has(w));
 let KBIDX=null;
@@ -1637,15 +1628,15 @@ function kbSearch(q,k){
   return {c,s:s/Math.sqrt(c.tk.length+8)}; }).filter(x=>x.s>0).sort((a,b)=>b.s-a.s).slice(0,k||3);
 }
 const leadQuery=l=>[l.necesidad.productos.map(p=>(cat(p.ref)||{}).es).join(' '),vv('sust',l.necesidad.sust,'es'),vv('ubic',l.necesidad.ubic,'es'),cname(l.pais),l.notas.map(n=>n.txt).join(' ')].join(' ');
-function cntUnits(l){ return l.offer?l.offer.lines.filter(x=>x.ref.startsWith('CNT')&&(!x.opt||x.inc)).reduce((a,x)=>a+x.qty,0):l.necesidad.productos.filter(p=>p.ref.startsWith('CNT')).reduce((a,p)=>a+(p.qty||1),0); }
+function cntUnits(l){ return l.offer?l.offer.lines.filter(x=>x.ref.startsWith('VPR')&&(!x.opt||x.inc)).reduce((a,x)=>a+x.qty,0):l.necesidad.productos.filter(p=>p.ref.startsWith('VPR')).reduce((a,p)=>a+(p.qty||1),0); }
 function cntQueue(){ let u=0; DB.leads.forEach(l=>{ const n=cntUnits(l); if(!n) return; if(l.stage==='ganado'&&now()-l.updated<120*DAY) u+=n; else if(l.stage==='negociacion') u+=n*0.5; }); return u; }
 function cntWeeks(extra){ const c=DB.twin.capacity; return c.baseWeeks+Math.ceil((cntQueue()+(extra||0))/Math.max(0.1,c.cntPerMonth)*4.33); }
 function availability(ref,qty){ const c=cat(ref); if(!c) return null; qty=qty||1;
- if(c.cat==='cnt') return {weeks:cntWeeks(qty),stock:null,src:'cartera de fabricación'};
+ if(c.cat==='prj') return {weeks:cntWeeks(qty),stock:null,src:'cartera de fabricación'};
  const st=DB.twin.stock[ref]||0; return st>=qty?{weeks:1,stock:st,src:'stock central'}:{weeks:(c.weeks||1)+(st?0:1),stock:st,src:st?'stock parcial':'reposición'}; }
 function availTxt(ref,qty){ const a=availability(ref,qty); if(!a) return ''; return (a.stock==null?'🏭 cartera fábrica':'📦 '+a.src+' ('+a.stock+')')+' · ~'+a.weeks+' sem'; }
 let SIM={leads:25,conv:20,pct:25,ticket:2500};
-function simulate(p){ const cap=Math.max(0.1,DB.twin.capacity.cntPerMonth), base=DB.twin.capacity.baseWeeks; let q=cntQueue(); const avg=((cat('CNT-REI120-2')||{price:15000}).price+(cat('CNT-REI120-4')||{price:21000}).price)/2; const rows=[];
+function simulate(p){ const cap=Math.max(0.1,DB.twin.capacity.cntPerMonth), base=DB.twin.capacity.baseWeeks; let q=cntQueue(); const avg=((cat('VPR-20K')||{price:15000}).price+(cat('VPR-40K')||{price:21000}).price)/2; const rows=[];
  for(let m=1;m<=12;m++){ const orders=p.leads*p.conv/100, cn=orders*p.pct/100, st=orders-cn; q=Math.max(0,q+cn-cap); rows.push({m,orders,cn,rev:cn*avg+st*p.ticket,load:cn/cap*100,q,weeks:base+Math.ceil(q/cap*4.33)}); }
  return rows; }
 function simSlider(k,lab,min,max,step,v,suf){ return `<div class="br" style="grid-template-columns:170px 1fr 70px;margin-bottom:4px"><span>${lab}</span><input type="range" min="${min}" max="${max}" step="${step}" value="${v}" data-sim="${k}" data-suf="${suf}" style="padding:0"><span class="v" id="simv-${k}">${v}${suf}</span></div>`; }
@@ -1655,25 +1646,25 @@ function renderGemelo(){
  <div class="grid2"><div class="fl">
   <div class="card"><h3>🏭 Estado operativo</h3>
    <div class="kpis" style="grid-template-columns:repeat(3,1fr);margin-bottom:8px">
-    <div class="kpi"><small>Cartera contenedores</small><b>${q.toFixed(1)}</b><span>ganados + 50 % negociación</span></div>
-    <div class="kpi"><small>Plazo actual REI 120</small><b>${cntWeeks(1)} sem</b><span>para 1 unidad nueva</span></div>
+    <div class="kpi"><small>Cartera proyectos</small><b>${q.toFixed(1)}</b><span>ganados + 50 % negociación</span></div>
+    <div class="kpi"><small>Plazo sistema a medida</small><b>${cntWeeks(1)} sem</b><span>para 1 unidad nueva</span></div>
     <div class="kpi"><small>Ocupación</small><b>${Math.round(q/Math.max(0.1,c.cntPerMonth)*100)} %</b><span>de un mes de capacidad</span></div></div>
-   <div class="fgrid"><label>Capacidad de fabricación (contenedores/mes)<input type="number" step="0.5" min="0.5" id="gCap" value="${c.cntPerMonth}"></label><label>Plazo base de fabricación (semanas)<input type="number" min="1" id="gBase" value="${c.baseWeeks}"></label></div>
+   <div class="fgrid"><label>Capacidad de fabricación (proyectos/mes)<input type="number" step="0.5" min="0.5" id="gCap" value="${c.cntPerMonth}"></label><label>Plazo base de fabricación (semanas)<input type="number" min="1" id="gBase" value="${c.baseWeeks}"></label></div>
    <div class="sec-t" style="margin-top:10px">Stock central · producto estándar</div>
-   <div style="max-height:230px;overflow:auto"><table class="ct"><thead><tr><th>Ref.</th><th>Producto</th><th>Stock</th><th>Plazo 1 ud</th></tr></thead><tbody>${DB.catalog.filter(x=>x.cat!=='cnt').map(x=>`<tr><td class="mono" style="font-size:11px">${esc(x.ref)}</td><td style="font-size:11.5px">${esc(x.es.split(' · ')[0])}</td><td><input type="number" min="0" data-stk="${esc(x.ref)}" value="${DB.twin.stock[x.ref]||0}" style="width:70px"></td><td class="mono mut" style="font-size:11px">~${availability(x.ref,1).weeks} sem</td></tr>`).join('')}</tbody></table></div>
+   <div style="max-height:230px;overflow:auto"><table class="ct"><thead><tr><th>Ref.</th><th>Producto</th><th>Stock</th><th>Plazo 1 ud</th></tr></thead><tbody>${DB.catalog.filter(x=>x.cat!=='prj').map(x=>`<tr><td class="mono" style="font-size:11px">${esc(x.ref)}</td><td style="font-size:11.5px">${esc(x.es.split(' · ')[0])}</td><td><input type="number" min="0" data-stk="${esc(x.ref)}" value="${DB.twin.stock[x.ref]||0}" style="width:70px"></td><td class="mono mut" style="font-size:11px">~${availability(x.ref,1).weeks} sem</td></tr>`).join('')}</tbody></table></div>
    <div class="mut" style="font-size:11px;margin-top:6px">Estos plazos se aplican automáticamente a cada línea de oferta, al PDF y a las respuestas del agente (siempre como orientativos).</div></div>
   <div class="card"><h3>📈 Simulador «¿qué pasa si…?»</h3>
-   ${simSlider('leads','Leads export / mes',5,100,1,SIM.leads,'')}${simSlider('conv','Conversión a pedido',5,60,1,SIM.conv,' %')}${simSlider('pct','Pedidos de contenedor',0,80,5,SIM.pct,' %')}${simSlider('ticket','Ticket medio estándar',300,8000,100,SIM.ticket,' €')}
+   ${simSlider('leads','Leads export / mes',5,100,1,SIM.leads,'')}${simSlider('conv','Conversión a pedido',5,60,1,SIM.conv,' %')}${simSlider('pct','Pedidos de proyecto',0,80,5,SIM.pct,' %')}${simSlider('ticket','Ticket medio estándar',300,8000,100,SIM.ticket,' €')}
    <div class="kpis" style="grid-template-columns:repeat(3,1fr);margin:10px 0 8px">
     <div class="kpi"><small>Ingresos 12 meses</small><b>${fmtE(revY)}</b><span>${rows[0].orders.toFixed(1)} pedidos/mes</span></div>
-    <div class="kpi"><small>Carga de fábrica</small><b style="color:${rows[0].load>100?'var(--bad)':'var(--ok)'}">${Math.round(rows[0].load)} %</b><span>${rows[0].cn.toFixed(1)} contenedores/mes</span></div>
-    <div class="kpi"><small>Plazo REI 120 · mes 12</small><b style="color:${last.weeks>12?'var(--bad)':'var(--am)'}">${last.weeks} sem</b><span>mes 6: ${m6.weeks} sem</span></div></div>
+    <div class="kpi"><small>Carga de fábrica</small><b style="color:${rows[0].load>100?'var(--bad)':'var(--ok)'}">${Math.round(rows[0].load)} %</b><span>${rows[0].cn.toFixed(1)} proyectos/mes</span></div>
+    <div class="kpi"><small>Plazo a medida · mes 12</small><b style="color:${last.weeks>12?'var(--bad)':'var(--am)'}">${last.weeks} sem</b><span>mes 6: ${m6.weeks} sem</span></div></div>
    ${bars(rows.map(r=>['Mes '+r.m,r.weeks]),r=>r[1]+' sem')}
-   <div class="mut" style="font-size:11.5px;margin-top:6px">${rows[0].load>100?'⚠️ La demanda de contenedores supera la capacidad: el plazo crece mes a mes. Señal para ampliar turnos o priorizar mercados.':'La capacidad absorbe la demanda: el plazo se mantiene estable.'}</div></div>
+   <div class="mut" style="font-size:11.5px;margin-top:6px">${rows[0].load>100?'⚠️ La demanda de proyectos supera la capacidad: el plazo crece mes a mes. Señal para ampliar turnos o priorizar mercados.':'La capacidad absorbe la demanda: el plazo se mantiene estable.'}</div></div>
  </div><div class="fl">
   <div class="card"><h3>💬 Asistente de conocimiento <span class="mut" style="text-transform:none;letter-spacing:0">${aiOn()?'Claude + base de conocimiento'+(kb.state==='live'?' + conector MCP':''):'búsqueda local · añade una clave API para respuestas redactadas'}</span></h3>
-   <div class="row"><input id="kbQ" placeholder="Ej.: ¿qué retención necesita un cliente con 6 IBC?" style="flex:1"><button class="btn pri" id="kbGo">Preguntar</button></div>
-   <div class="row" style="margin-top:6px">${['¿Qué normativa aplica en Reino Unido?','¿Cómo respondo si dicen que es caro?','¿Qué necesita el cliente para instalar el contenedor?'].map(x=>`<button class="btn sm" data-kbq="${esc(x)}">${esc(x)}</button>`).join('')}</div>
+   <div class="row"><input id="kbQ" placeholder="Ej.: ¿qué caudal necesita un taller de 2.000 m³?" style="flex:1"><button class="btn pri" id="kbGo">Preguntar</button></div>
+   <div class="row" style="margin-top:6px">${['¿Cuántas renovaciones/hora recomendáis para un taller de soldadura?','¿Cómo respondo si dicen que es caro?','¿Qué necesita el cliente para instalar el sistema?'].map(x=>`<button class="btn sm" data-kbq="${esc(x)}">${esc(x)}</button>`).join('')}</div>
    <div id="kbOut" style="margin-top:8px"></div></div>
   <div class="card"><h3>📚 Base de conocimiento · ${DB.twin.docs.length} documentos</h3>
    <div class="fl">${DB.twin.docs.map((d,i)=>`<div class="note int" style="display:flex;justify-content:space-between;gap:8px;align-items:center"><span><b>${esc(d.title)}</b><small>${esc(d.type)} · ${d.text.length.toLocaleString('es-ES')} caracteres · ${fmtDL(d.updated)}</small></span><span class="row"><button class="btn sm" data-dedit="${i}">Editar</button><button class="btn sm bad" data-ddel="${i}">✕</button></span></div>`).join('')}</div>
@@ -1702,7 +1693,7 @@ function openDocEditor(i){
 async function kbAsk(q){
  const hits=kbSearch(q,4), src=hits.map(h=>h.c.doc), ctx=hits.map((h,i)=>`[${i+1}] (${h.c.doc}) ${h.c.txt}`).join('\n\n'), s=srv('kb');
  if(!aiOn()) return {ans:hits.length?hits.map((h,i)=>`[${i+1}] ${h.c.txt}`).join('\n\n'):'No encuentro nada en la base de conocimiento.',src};
- const sys='Eres el asistente de conocimiento interno de ACME (equipos para almacenar y manipular mercancías peligrosas). Responde en español, breve y práctico, citando las fuentes [n]. Si la información no está en las fuentes, dilo claramente; no inventes datos técnicos ni normativos.';
+ const sys='Eres el asistente de conocimiento interno de ACME (ventilación industrial). Responde en español, breve y práctico, citando las fuentes [n]. Si la información no está en las fuentes, dilo claramente; no inventes datos técnicos.';
  if(s&&s.state==='live'&&s.url){ try{ const r=await callClaudeMcp([s],`Pregunta del equipo comercial: ${q}\n\nContexto del gemelo digital:\n${ctx||'(sin resultados locales)'}\n\nBusca también en la base de conocimiento de la empresa con las herramientas del conector.`,{system:sys,deny:writeTools(s),max_tokens:1200}); return {ans:r.text,src:src.concat(['Conector de conocimiento (MCP)'])}; }catch(e){ toast('Conector de conocimiento: '+e.message,'bad'); } }
  if(s&&s.state==='demo') src.push('Conector de conocimiento (demo: solo base local)');
  return {ans:await aiText(sys,`Pregunta: ${q}\n\nFuentes:\n${ctx||'(vacío)'}`,800),src};
@@ -1744,9 +1735,9 @@ function seedMemory(){
  DB.leads.forEach(l=>{ memAdd(l,`${fmtDL(l.created)} · ${SRC[l.source]}: pidió ${l.necesidad.productos.map(p=>p.qty+'× '+p.ref).join(', ')}`,'auto'); l.notas.forEach(n=>memAdd(l,'Dijo: «'+n.txt+'»','auto'));
   if(l.offer&&l.offer.sentAt) memAdd(l,`${fmtDL(l.offer.sentAt)} · oferta ${l.offer.number} enviada por ${fmtE(offerTotals(l).total)}`,'auto');
   if(l.stage==='ganado') memAdd(l,'GANADO '+(l.offer?l.offer.number:''),'auto'); if(l.stage==='perdido') memAdd(l,'PERDIDO: '+l.lost,'auto'); });
- ['Metalúrgica Norte (España): perdido por precio frente a tienda online → reforzar asesoramiento normativo y ensayo del conjunto desde la primera llamada.',
+ ['Talleres del Norte (España): perdido por precio frente a tienda online → reforzar el cálculo de ahorro energético y la puesta en marcha incluida desde la primera llamada.',
   'Los contactos de Polonia suelen ser distribuidores y piden precio de distribuidor: preparar escala de descuentos antes de ofertar.',
-  'En Francia, mencionar la normativa ICPE y la próxima inspección de la DREAL acelera la decisión.']
+  'En talleres con soldadura, proponer la caja acústica y mencionar el nivel sonoro acelera la decisión.']
   .forEach((t,i)=>DB.memory.global.push({t:now()-(5+i)*DAY,txt:t,src:'manual'}));
 }
 let MEMQ='';
